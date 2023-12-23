@@ -2,7 +2,7 @@
 import '../styles/global.scss';
 import NavigationComponent from '../components/NavigationComponent.astro';
 
-let test: String = 'moin';
+const pageTitle: String = 'Nuestra Historia';
 ---
 
 <html lang="en">
@@ -11,10 +11,10 @@ let test: String = 'moin';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{test}</title>
+		<title>{pageTitle}</title>
 	</head>
 	<body>
     <NavigationComponent/>
-		<h1>{test}</h1>
+		<h1>{pageTitle}</h1>
 	</body>
 </html>
