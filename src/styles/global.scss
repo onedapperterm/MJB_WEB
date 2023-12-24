@@ -1,9 +1,40 @@
 * {
   box-sizing: border-box;
+  --font-color: white;
 }
 
 h1 {
-  margin: 1rem 0;
-  font-size: 2.5rem;
-  color: palevioletred;
+  font-family: 'Qwitcher Grypen', cursive;
+  font-size: 128px;
+  font-weight: 100; 
+}
+
+h2 {
+  font-family: 'Alice', serif;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+}
+
+h3 {
+  font-family: 'Qwitcher Grypen', cursive;
+  font-size: 65px;
+  font-weight: normal;
+  color: #5C4433;
+  margin: 0;
+
+}
+
+p {
+  font-family: 'Alice', serif;
+  font-size: 20px;
+  font-weight: normal;
+  color: #5C4433;
+}
+
+body {
+  height: 100vh;
+  height: 100dvh;
+  margin: 0%;
+  box-sizing: border-box;
 }
