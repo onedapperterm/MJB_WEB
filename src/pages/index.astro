@@ -1,6 +1,8 @@
 ---
 import "../styles/global.scss";
 import NavigationComponent from "../components/NavigationComponent.astro";
+import { Image } from 'astro:assets';
+import backgroundHome from '../../public/assets/img/foto.jpg';
 
 let test: String = "moin";
 ---
@@ -33,8 +35,8 @@ let test: String = "moin";
     <div class="background-container">
       <picture>
         <source srcset="assets/img/foto.jpg" media="(min-width: 600px)" />
-        <img
-          src="public/assets/img/foto.jpg"
+        <Image 
+          src={backgroundHome}
           alt="Background"
           class="main-background"
         />
