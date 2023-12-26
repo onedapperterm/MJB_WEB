@@ -32,7 +32,8 @@ import backgroundHome from '../../public/assets/img/foto.jpg';
 
   </BaseLayout>
 
-<style>  
+
+<style lang="scss">
   .date .date-number {
     text-align: center;
     font-size: 32px;
@@ -42,29 +43,31 @@ import backgroundHome from '../../public/assets/img/foto.jpg';
     padding-right: 5px;
   }
 
-  .date .date-number:hover {
-    scale: 1.2;
+
+
+.date .date-number:hover {
+  scale: 1.2;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-title {
+  span {
+    font-family: "Alice", serif;
+    font-size: 48px;
   }
 
-  .date {
+  h1 {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
+    text-align: center;
   }
-
-  .main-title {
-    span {
-      font-family: "Alice", serif;
-      font-size: 48px;
-    }
-
-    h1 {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
-  }
+}
 </style>
