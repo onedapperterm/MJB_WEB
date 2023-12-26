@@ -1,20 +1,78 @@
 ---
-import '../styles/global.scss';
-import NavigationComponent from '../components/NavigationComponent.astro';
+import "../styles/global.scss";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import StoryCheckpointComponent from "../components/StoryCheckpointComponent.astro";
+import FooterComponent from "../components/FooterComponent.astro";
 
-const pageTitle: String = 'Nuestra Historia';
+let checkpoint1 = {
+  title: "Aquí inició todo",
+  description:
+    "El día en que decidimos armar nuestras maletas y cruzar el atlántico para iniciar una nueva aventura.",
+  icon: "fa-regular fa-heart fa-2xl",
+  image:
+    "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  imageAlt: "first-img",
+  direction: "left"
+};
+let checkpoint2 = {
+  title: "Aquí inició todo 2",
+  description:
+    "El día en que decidimos armar nuestras maletas y cruzar el atlántico para iniciar una nueva aventura.",
+  icon: "fa-regular fa-heart fa-2xl",
+  image:
+    "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  imageAlt: "first-img",
+  direction: "right"
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-    <NavigationComponent/>
-		<h1>{pageTitle}</h1>
-	</body>
-</html>
+<BaseLayout pageLayout="historia" pageTitle="Nuestra Historia">
+  <div class="background-container">
+    <picture>
+      <source
+        srcset="https://images.pexels.com/photos/792777/pexels-photo-792777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        media="(min-width: 600px)"
+      />
+      <img
+        src="https://images.pexels.com/photos/792777/pexels-photo-792777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        alt="Background"
+        class="main-background"
+      />
+    </picture>
+  </div>
+
+  <div class="title-one">
+    <h1>Nuestra historia de amor</h1>
+  </div>
+
+  <section class="timeline-container">
+    <StoryCheckpointComponent checkpointData={checkpoint1} />
+    <StoryCheckpointComponent checkpointData={checkpoint2} />
+    <StoryCheckpointComponent checkpointData={checkpoint1} />
+    <StoryCheckpointComponent checkpointData={checkpoint2} />
+  </section>
+
+  <FooterComponent />
+</BaseLayout>
+
+<style>
+  .text-center {
+    text-align: center;
+  }
+
+  .title-one {
+    text-align: center;
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: grid;
+    align-content: center;
+
+    h1 {
+      transform: translate(0, -40px);
+    }
+   }
+
+   .timeline-container {
+    background-color: white;
+}
+</style>

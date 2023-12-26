@@ -7,6 +7,7 @@ h1 {
   font-family: 'Qwitcher Grypen', cursive;
   font-size: 128px;
   font-weight: 100; 
+  color: white;
 }
 
 h2 {
@@ -37,4 +38,31 @@ body {
   height: 100dvh;
   margin: 0%;
   box-sizing: border-box;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--font-color);
+}
+
+.background-container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+  top: 0;
+}
+
+.main-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cubre todo el fondo sin distorsionar la imagen */
+  object-position: center; /* Centra la imagen en el fondo */
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(60%) contrast(100%);
 }

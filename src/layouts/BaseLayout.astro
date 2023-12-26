@@ -1,0 +1,34 @@
+---
+import "../styles/global.scss";
+import NavigationComponent from "../components/NavigationComponent.astro";
+const {pageLayout, pageTitle} = Astro.props;
+
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+	  <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alice&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Qwitcher+Grypen&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>May&Juli | {pageTitle}</title>
+  </head>
+  <body>
+    <NavigationComponent pagenavigation={pageLayout}/> 
+    <slot />
+  </body>
+</html>
