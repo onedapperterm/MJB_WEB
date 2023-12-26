@@ -1,5 +1,6 @@
 ---
 import "../styles/global.scss";
+const {pagenavigation} = Astro.props;
 ---
 
 <nav class="main-menu">
@@ -8,16 +9,17 @@ import "../styles/global.scss";
     <i class="fa-solid fa-bars" style="color: #ffffff"></i>
   </label>
   <ul>
-    <li><a class="active" href="/">Home</a></li>
+    <li><a class={pagenavigation=="home" ? "active" : ""} href="/">Home</a></li>
     <span class="spacer"></span>
-    <li><a href="/historia">Nuestra Historia</a></li>
+    <li><a class={pagenavigation=="historia" ? "active" : ""} href="/historia">Nuestra Historia</a></li>
     <span class="spacer"></span>
-    <li><a href="#">Boda</a></li>
+    <li><a class={pagenavigation=="boda" ? "active" : ""} href="/boda">Boda</a></li>
     <span class="spacer"></span>
     <li><a href="#">Contacto</a></li>
     <span class="spacer"></span>
     <li><a href="#">Reservación</a></li>
   </ul>
+
 </nav>
 
 <style lang="scss">

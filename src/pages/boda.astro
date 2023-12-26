@@ -1,0 +1,53 @@
+---
+import "../styles/global.scss";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FooterComponent from "../components/FooterComponent.astro";
+---
+
+<BaseLayout pageLayout="boda" pageTitle="Boda">
+  <div class="background-container">
+    <picture>
+      <source
+        srcset="https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        media="(min-width: 600px)"
+      />
+      <img
+        src="https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        alt="Background"
+        class="main-background"
+      />
+    </picture>
+  </div>
+
+  <div class="title-one">
+    <h1>Los detalles del día</h1>
+  </div>
+
+  <FooterComponent />
+</BaseLayout>
+
+<style>
+  .text-center {
+    text-align: center;
+  }
+
+  .title-one {
+    text-align: center;
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: grid;
+    align-content: center;
+
+    h1 {
+      transform: translate(0, -40px);
+    }
+  }
+
+  .timeline-container {
+    background-color: white;
+  }
+
+  .background-container {
+    background: linear-gradient(180deg, rgba(92,68,51,0.9038209033613446) 0%, rgba(92,68,51,0.4220281862745098) 100%);
+  }
+</style>

@@ -1,37 +1,11 @@
 ---
 import "../styles/global.scss";
-import NavigationComponent from "../components/NavigationComponent.astro";
+import BaseLayout from "../layouts/BaseLayout.astro"
 import { Image } from 'astro:assets';
 import backgroundHome from '../../public/assets/img/foto.jpg';
 
-let test: String = "moin";
 ---
-
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alice&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Qwitcher+Grypen&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      rel="stylesheet"
-    />
-    <title>{test}</title>
-  </head>
-  <body>
-    <NavigationComponent />
-
+  <BaseLayout pageLayout="home" pageTitle="Home">
     <div class="background-container">
       <picture>
         <source srcset="assets/img/foto.jpg" media="(min-width: 600px)" />
@@ -55,43 +29,21 @@ let test: String = "moin";
       </div>
       <h2>VILLA DE LEYVA, COLOMBIA</h2>
     </section>
-  </body>
-</html>
+
+  </BaseLayout>
+
 
 <style lang="scss">
-.main-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--font-color);
-}
+  .date .date-number {
+    text-align: center;
+    font-size: 32px;
+    border-left: 1px var(--font-color) solid;
+    border-right: 1px var(--font-color) solid;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 
-.background-container {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  z-index: -1;
-  top: 0;
-}
-.main-background {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Cubre todo el fondo sin distorsionar la imagen */
-  object-position: center; /* Centra la imagen en el fondo */
-  position: absolute;
-  top: 0;
-  left: 0;
-  filter: brightness(60%) contrast(100%);
-}
-.date .date-number {
-  text-align: center;
-  font-size: 32px;
-  border-left: 1px var(--font-color) solid;
-  border-right: 1px var(--font-color) solid;
-  padding-left: 5px;
-  padding-right: 5px;
-}
+
 
 .date .date-number:hover {
   scale: 1.2;
