@@ -1,16 +1,16 @@
 ---
 import "../styles/global.scss";
 import BaseLayout from "../layouts/BaseLayout.astro"
-import { Image } from 'astro:assets';
-import backgroundHome from '../../public/assets/img/foto.jpg';
 
 ---
   <BaseLayout pageLayout="home" pageTitle="Home">
     <div class="background-container">
       <picture>
-        <source srcset="assets/img/foto.jpg" media="(min-width: 600px)" />
-        <Image 
-          src={backgroundHome}
+        <source 
+        srcset="https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+        media="(min-width: 600px)" />
+        <img
+          src="https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="Background"
           class="main-background"
         />

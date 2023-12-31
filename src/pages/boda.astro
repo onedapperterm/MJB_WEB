@@ -23,10 +23,104 @@ import FooterComponent from "../components/FooterComponent.astro";
     <h1>Los detalles del día</h1>
   </div>
 
+  <section class="countdown-section">
+    <div
+      class="countdown-img-container"
+      style="background-image:url(assets/img/Flores.png)"
+    >
+    </div>
+
+    <p class="wedding-date">21 de Diciembre de 2024</p>
+    <p>EL GRAN DÍA</p>
+
+    <div class="countdown-container">
+      <div class="countdown-unit">
+        <h1>388</h1>
+        <p>Día(s)</p>
+      </div>
+      <div class="countdown-unit">
+        <h1>21</h1>
+        <p>Hora(s)</p>
+      </div>
+      <div class="countdown-unit">
+        <h1>35</h1>
+        <p>Minuto(s)</p>
+      </div>
+      <div class="countdown-unit">
+        <h1>01</h1>
+        <p>Segundo(s)</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wedding-details">
+    <p class="details-title">Detalles</p>
+    <p>Aquí te dejamos los detalles del gran día.</p>
+
+    <div class="details-container">
+      <div class="details-unit">
+        <i class="fa-regular fa-calendar fa-2xl" style="color: #ffffff;"></i>
+        <h1>Detalles del evento</h1>
+        <p>Fecha: 21 de Diciembre de 2024</p>
+        <p>Hora: 17:00</p>
+        <p>Dirección: Villa de Leyva</p>
+      </div>
+      <div class="details-unit">
+        <i class="fa-regular fa-user fa-2xl" style="color: #ffffff;"></i>
+        <h1>Dresscode</h1>
+        <p>Mujeres: Vestido Largo <br />Colores oscuros</p>
+        <p>Hombres: Traje Negro <br />Corbata negra</p>
+      </div>
+      <div class="details-unit">
+        <i class="fa-regular fa-bell fa-2xl" style="color: #ffffff;"></i>
+        <h1>Importante!</h1>
+        <p>
+          Queremos que estén conectados con nosotros durante la ceremonia, por
+          favor no utilicen el celular ni publiquen en redes sociales.
+          Disfrutemos juntos de principio a fin.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div
+    class="location-img-section"
+    style="background:url(https://images.pexels.com/photos/17589032/pexels-photo-17589032/free-photo-of-wahrzeichen-kirche-museum-mexiko.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)"
+  >
+  </div>
+
+  <section class="hotels-section">
+    <p class="hotels-section-title">Hoteles cerca</p>
+
+   <div class="hotels-section-container">
+    <div class="hotels-section-unit">
+      <h1>Hotel Campanario de la Villa</h1>
+      <p>
+        Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001 Colombia
+      </p>
+      <p>00 57 310 5500216</p>
+    </div>
+    <div class="hotels-section-unit">
+      <h1>Hotel Campanario de la Villa</h1>
+      <p>
+        Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001 Colombia
+      </p>
+      <p>00 57 310 5500216</p>
+    </div>
+    <div class="hotels-section-unit">
+      <h1>Hotel Campanario de la Villa</h1>
+      <p>
+        Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001 Colombia
+      </p>
+      <p>00 57 310 5500216</p>
+    </div>
+  </div> 
+  </section>
+
   <FooterComponent />
 </BaseLayout>
 
-<style>
+<style lang="scss">
   .text-center {
     text-align: center;
   }
@@ -40,6 +134,7 @@ import FooterComponent from "../components/FooterComponent.astro";
 
     h1 {
       transform: translate(0, -40px);
+      font-size: 11rem;
     }
   }
 
@@ -48,6 +143,227 @@ import FooterComponent from "../components/FooterComponent.astro";
   }
 
   .background-container {
-    background: linear-gradient(180deg, rgba(92,68,51,0.9038209033613446) 0%, rgba(92,68,51,0.4220281862745098) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(92, 68, 51, 0.9038209033613446) 0%,
+      rgba(92, 68, 51, 0.4220281862745098) 100%
+    );
+  }
+
+  .countdown-section {
+    background-color: white;
+    padding: 15ch 5px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    .wedding-date {
+      font-size: 40px;
+    }
+    p {
+      font-size: 20px;
+      margin: 10px;
+    }
+  }
+
+  .countdown-container {
+    max-width: 650px;
+    margin: auto;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 100px;
+
+    h1 {
+      color: #b18552;
+      font-size: 80px;
+      margin-bottom: 0%;
+      margin-top: 0%;
+    }
+
+    p {
+      color: #5c4433;
+      font-size: 15px;
+      margin: 0%;
+    }
+  }
+
+  .countdown-img-container {
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0%;
+  }
+
+  .wedding-details {
+    background-color: #a3968d;
+    text-align: center;
+    margin: 0%;
+    padding: 15ch;
+
+    .details-title {
+      font-size: 35px;
+      margin: 0%;
+    }
+
+    p {
+      color: white;
+      font-size: 20px;
+      margin: 3%;
+    }
+
+    .details-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
+    .details-unit {
+      width: 33%;
+
+      h1 {
+        font-family: Alice;
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 15px;
+        line-height: 25px;
+      }
+
+      i {
+        padding: 2ch;
+      }
+    }
+  }
+
+  .location-img-section {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .hotels-section {
+    background-color: white;
+    text-align: center;
+    margin: 0;
+    padding: 5ch;
+
+    .hotels-section-title {
+      font-family: Alice;
+      font-size: 35px;
+    }
+
+    .hotels-section-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
+
+    .hotels-section-unit {
+      width: 33%;
+      padding: 5ch;
+
+      h1 {
+      font-family: Alice;
+      font-size: 22px;
+      color: #5c4433;
+    }
+
+    p {
+      font-size: 15px;
+      color: #A3968D;
+      font-weight: lighter;
+      line-height: 20px;
+    }
+  }
+}
+
+  @media only screen and (min-width: 890px) {
+    .countdown-img-container {
+      width: 48%;
+    }
+  }
+
+  @media only screen and (max-width: 620px) {
+    .title-one {
+      h1 {
+        font-size: 4rem;
+      }
+    }
+    .countdown-unit {
+      h1 {
+        font-size: 35px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+    .countdown-container {
+      padding: 0px 40px;
+    }
+
+    .countdown-section {
+      .wedding-date {
+        font-size: 27px;
+      }
+      p {
+        font-size: 17px;
+        margin: 1ch;
+      }
+    }
+  }
+  @media only screen and (max-width: 420px) {
+    .countdown-unit {
+      h1 {
+        font-size: 30px;
+      }
+      p {
+        font-size: 8px;
+      }
+    }
+    .wedding-details {
+      padding: 10ch 5ch;
+
+      .details-title {
+        font-size: 25px;
+        margin: 0%;
+      }
+
+      p {
+        color: white;
+        font-size: 15px;
+        margin: 3%;
+      }
+
+      .details-unit {
+        width: 100%;
+
+        h1 {
+          font-family: Alice;
+          font-size: 18px;
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 25px;
+        }
+      }
+
+      .details-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   }
 </style>
