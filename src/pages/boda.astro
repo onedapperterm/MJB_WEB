@@ -2,6 +2,7 @@
 import "../styles/global.scss";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FooterComponent from "../components/FooterComponent.astro";
+import CountdownComponent from "../components/CountdownComponent.astro";
 ---
 
 <BaseLayout pageLayout="boda" pageTitle="Boda">
@@ -23,35 +24,7 @@ import FooterComponent from "../components/FooterComponent.astro";
     <h1>Los detalles del día</h1>
   </div>
 
-  <section class="countdown-section">
-    <div
-      class="countdown-img-container"
-      style="background-image:url(assets/img/Flores.png)"
-    >
-    </div>
-
-    <p class="wedding-date">21 de Diciembre de 2024</p>
-    <p>EL GRAN DÍA</p>
-
-    <div class="countdown-container">
-      <div class="countdown-unit">
-        <h1>388</h1>
-        <p>Día(s)</p>
-      </div>
-      <div class="countdown-unit">
-        <h1>21</h1>
-        <p>Hora(s)</p>
-      </div>
-      <div class="countdown-unit">
-        <h1>35</h1>
-        <p>Minuto(s)</p>
-      </div>
-      <div class="countdown-unit">
-        <h1>01</h1>
-        <p>Segundo(s)</p>
-      </div>
-    </div>
-  </section>
+  <CountdownComponent />
 
   <section class="wedding-details">
     <p class="details-title">Detalles</p>
@@ -92,29 +65,32 @@ import FooterComponent from "../components/FooterComponent.astro";
   <section class="hotels-section">
     <p class="hotels-section-title">Hoteles cerca</p>
 
-   <div class="hotels-section-container">
-    <div class="hotels-section-unit">
-      <h1>Hotel Campanario de la Villa</h1>
-      <p>
-        Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001 Colombia
-      </p>
-      <p>00 57 310 5500216</p>
+    <div class="hotels-section-container">
+      <div class="hotels-section-unit">
+        <h1>Hotel Campanario de la Villa</h1>
+        <p>
+          Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001
+          Colombia
+        </p>
+        <p>00 57 310 5500216</p>
+      </div>
+      <div class="hotels-section-unit">
+        <h1>Hotel Campanario de la Villa</h1>
+        <p>
+          Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001
+          Colombia
+        </p>
+        <p>00 57 310 5500216</p>
+      </div>
+      <div class="hotels-section-unit">
+        <h1>Hotel Campanario de la Villa</h1>
+        <p>
+          Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001
+          Colombia
+        </p>
+        <p>00 57 310 5500216</p>
+      </div>
     </div>
-    <div class="hotels-section-unit">
-      <h1>Hotel Campanario de la Villa</h1>
-      <p>
-        Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001 Colombia
-      </p>
-      <p>00 57 310 5500216</p>
-    </div>
-    <div class="hotels-section-unit">
-      <h1>Hotel Campanario de la Villa</h1>
-      <p>
-        Carrera 11a #12-47 Centro Histórico <br />Villa de Leyva 154001 Colombia
-      </p>
-      <p>00 57 310 5500216</p>
-    </div>
-  </div> 
   </section>
 
   <FooterComponent />
@@ -148,58 +124,6 @@ import FooterComponent from "../components/FooterComponent.astro";
       rgba(92, 68, 51, 0.9038209033613446) 0%,
       rgba(92, 68, 51, 0.4220281862745098) 100%
     );
-  }
-
-  .countdown-section {
-    background-color: white;
-    padding: 15ch 5px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-
-    .wedding-date {
-      font-size: 40px;
-    }
-    p {
-      font-size: 20px;
-      margin: 10px;
-    }
-  }
-
-  .countdown-container {
-    max-width: 650px;
-    margin: auto;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    align-items: center;
-    padding: 15px 100px;
-
-    h1 {
-      color: #b18552;
-      font-size: 80px;
-      margin-bottom: 0%;
-      margin-top: 0%;
-    }
-
-    p {
-      color: #5c4433;
-      font-size: 15px;
-      margin: 0%;
-    }
-  }
-
-  .countdown-img-container {
-    position: absolute;
-    width: 60%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0%;
   }
 
   .wedding-details {
@@ -274,24 +198,21 @@ import FooterComponent from "../components/FooterComponent.astro";
       padding: 5ch;
 
       h1 {
-      font-family: Alice;
-      font-size: 22px;
-      color: #5c4433;
-    }
+        font-family: Alice;
+        font-size: 22px;
+        color: #5c4433;
+      }
 
-    p {
-      font-size: 15px;
-      color: #A3968D;
-      font-weight: lighter;
-      line-height: 20px;
+      p {
+        font-size: 15px;
+        color: #a3968d;
+        font-weight: lighter;
+        line-height: 20px;
+      }
     }
   }
-}
 
   @media only screen and (min-width: 890px) {
-    .countdown-img-container {
-      width: 48%;
-    }
   }
 
   @media only screen and (max-width: 620px) {
@@ -300,37 +221,8 @@ import FooterComponent from "../components/FooterComponent.astro";
         font-size: 4rem;
       }
     }
-    .countdown-unit {
-      h1 {
-        font-size: 35px;
-      }
-      p {
-        font-size: 12px;
-      }
-    }
-    .countdown-container {
-      padding: 0px 40px;
-    }
-
-    .countdown-section {
-      .wedding-date {
-        font-size: 27px;
-      }
-      p {
-        font-size: 17px;
-        margin: 1ch;
-      }
-    }
   }
   @media only screen and (max-width: 420px) {
-    .countdown-unit {
-      h1 {
-        font-size: 30px;
-      }
-      p {
-        font-size: 8px;
-      }
-    }
     .wedding-details {
       padding: 10ch 5ch;
 
@@ -366,22 +258,21 @@ import FooterComponent from "../components/FooterComponent.astro";
       }
     }
 
-    .hotels-section{
-
-    .hotels-section-container {
+    .hotels-section {
+      .hotels-section-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .hotels-section-unit {
-      width: 100%;
-      padding: 2ch;
-
-      h1 {
-        font-size: 18px;
       }
-    }
+
+      .hotels-section-unit {
+        width: 100%;
+        padding: 2ch;
+
+        h1 {
+          font-size: 18px;
+        }
+      }
     }
   }
 </style>
