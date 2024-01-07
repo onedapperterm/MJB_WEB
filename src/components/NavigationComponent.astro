@@ -26,6 +26,7 @@ const {pagenavigation} = Astro.props;
 .main-menu {
   height: 80px;
 
+
   ul {
     list-style: none;
     display: flex;
@@ -81,6 +82,8 @@ const {pagenavigation} = Astro.props;
     display: block;
   }
   .main-menu {
+    
+
     ul  {
       position: fixed;
       flex-direction: column;
@@ -93,6 +96,7 @@ const {pagenavigation} = Astro.props;
       text-align: left;
       transition: all .5s;
       align-items: flex-start;
+      z-index: 1;
 
       li {
         display: block;
