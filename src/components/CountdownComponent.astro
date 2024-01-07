@@ -1,0 +1,159 @@
+---
+
+---
+
+<section class="countdown-section">
+    <div
+      class="countdown-img-container"
+      style="background-image:url(https://img.freepik.com/vector-gratis/dibujo-floral-decorativo-artistico_1035-20409.jpg?w=1060&t=st=1704643179~exp=1704643779~hmac=b1cd2d42936fa4e4b3c59cd51643b780c392ef335388ad4a68d0143dce358090)"
+    >
+    </div>
+
+    <p class="wedding-date">21 de Diciembre de 2024</p>
+    <p>EL GRAN DÍA</p>
+
+    <div class="countdown-container">
+      <div class="countdown-unit">
+        <h1 id="days">-</h1>
+        <p>Día(s)</p>
+      </div>
+      <div class="countdown-unit">
+        <h1 id="hours">-</h1>
+        <p>Hora(s)</p>
+      </div>
+      <div class="countdown-unit">
+        <h1 id="minutes">-</h1>
+        <p>Minuto(s)</p>
+      </div>
+      <div class="countdown-unit">
+        <h1 id="seconds">-</h1>
+        <p>Segundo(s)</p>
+      </div>
+    </div>
+  </section>
+
+
+  <style lang="scss">
+    .countdown-section {
+    background-color: white;
+    padding: 15ch 5px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    .wedding-date {
+      font-size: 40px;
+      position: relative;
+    }
+    p {
+      font-size: 20px;
+      margin: 10px;
+    }
+  }
+
+  .countdown-container {
+    max-width: 650px;
+    margin: auto;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 100px;
+    position: relative;
+
+    h1 {
+      color: #b18552;
+      font-size: 80px;
+      margin-bottom: 0%;
+      margin-top: 0%;
+    }
+
+    p {
+      color: #5c4433;
+      font-size: 15px;
+      margin: 0%;
+    }
+  }
+
+  .countdown-img-container {
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: auto;
+    left: 50%;
+    transform: translateX(-50%) rotate(270deg);
+    top: 0%;
+    opacity: 0.2;
+  }
+
+  @media only screen and (min-width: 890px) {
+    .countdown-img-container {
+      width: 48%;
+    }
+  }
+
+  @media only screen and (max-width: 620px) {
+        .countdown-unit {
+        h1 {
+            font-size: 35px;
+        }
+        p {
+            font-size: 12px;
+        }
+        }
+        .countdown-container {
+        padding: 0px 40px;
+        }
+
+        .countdown-section {
+
+        .wedding-date {
+            font-size: 27px;
+        }
+        p {
+            font-size: 17px;
+            margin: 1ch;
+        }
+        }
+    }
+
+    @media only screen and (max-width: 420px) {
+    .countdown-unit {
+      h1 {
+        font-size: 30px;
+      }
+      p {
+        font-size: 8px;
+      }
+    }
+}
+
+  </style>
+
+  <script>
+    var countDownDate = new Date("Dec 21, 2024 00:00:00").getTime();
+    var interval = setInterval(() => {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000* 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        
+        var daysElement = document.getElementById("days");
+        if(daysElement?.innerHTML) daysElement.innerHTML = String(days);
+        var hoursElement = document.getElementById("hours");
+        if(hoursElement?.innerHTML) hoursElement.innerHTML = String(hours);
+        var minutesElement = document.getElementById("minutes");
+        if(minutesElement?.innerHTML) minutesElement.innerHTML = String(minutes);
+        var secondsElement = document.getElementById("seconds");
+        if(secondsElement?.innerHTML) secondsElement.innerHTML = String(seconds);
+    }, 1000)
+
+
+  </script>
