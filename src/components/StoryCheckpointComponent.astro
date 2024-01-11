@@ -1,12 +1,11 @@
 ---
-import { Image } from "astro:assets";
 const { checkpointData } = Astro.props;
 ---
 
 <div class="checkpoint-container">
   <div class="middle-line"></div>
   <h3 class:list={[checkpointData.direction]}>{checkpointData.title}</h3>
-    <p class:list={["checkpoint-description", checkpointData.direction, "text-center"]}>{checkpointData.description}</p>
+  <p class:list={["checkpoint-description", checkpointData.direction, "text-center"]}>{checkpointData.description}</p>
   <div class="checkpoint-icon">
     <i class={checkpointData.icon}></i>
   </div>
@@ -16,10 +15,11 @@ const { checkpointData } = Astro.props;
 </div>
 
 <style lang="scss">
+
   .middle-line {
     position: absolute;
     width: 2px;
-    height: 340px;
+    height: 380px;
     background: #A3968D;
     transform: translateX(-50%);
     left: 50%;
@@ -32,12 +32,15 @@ const { checkpointData } = Astro.props;
     align-items: center;
     padding-top: 70px;
     padding-bottom: 70px;
-    height: 340px;
+    height: 380px;
+    max-width: 1200px;
+    margin: auto;
   }
 
   h3 {
     align-self: baseline;
     text-align: center;
+    line-height: 2.5rem;
     
     &.left {
       grid-area: left;
@@ -91,8 +94,8 @@ const { checkpointData } = Astro.props;
   }
 
   .checkpoint-image {
-    width: 200px;
-    height: 200px;
+    width: 240px;
+    height: 240px;
     overflow: hidden;
     border-radius: 50%;
     margin: auto;
@@ -104,13 +107,36 @@ const { checkpointData } = Astro.props;
     }
   }
 
-  @media only screen and (min-width: 890px) {
+  @media only screen and (min-width: 1200px) {
+    .middle-line {
+      height: 440px;
+    }
+
+    .checkpoint-container {
+      height: 440px;
+    }
+
+    .checkpoint-image {
+      width: 300px;
+      height: 300px;
+    }
+
+    h3 {
+      margin-top: 2.5rem;
+      font-size: 4.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 780px) {
+    h3 {
+      font-size: 3.5rem;
+    }
+     .checkpoint-description {
+      font-size: inherit;
+    }
   }
 
   @media only screen and (max-width: 620px) {
-  }
-
-  @media only screen and (max-width: 420px) {
     .middle-line {
       height: 100px;
       grid-area: icon;
@@ -131,7 +157,9 @@ const { checkpointData } = Astro.props;
     
     h3 {
       grid-area: tittle !important;
+      line-height: normal;
     }
+
     .checkpoint-description {
       grid-area: description !important;
       max-width: 95%;
