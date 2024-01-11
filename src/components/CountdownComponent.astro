@@ -5,7 +5,7 @@
 <section class="countdown-section">
   <div
     class="countdown-img-container"
-    style="background-image:url(https://img.freepik.com/vector-gratis/dibujo-floral-decorativo-artistico_1035-20409.jpg?w=1060&t=st=1704643179~exp=1704643779~hmac=b1cd2d42936fa4e4b3c59cd51643b780c392ef335388ad4a68d0143dce358090)"
+    style="background-image:url(https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2FFlores.png?alt=media&token=3e4a98d2-d388-4bff-8bd5-7f47b4475d0d)"
   >
   </div>
 
@@ -33,6 +33,7 @@
 </section>
 
 <style lang="scss">
+
   .countdown-section {
     background-color: white;
     padding: 15ch 5px;
@@ -76,22 +77,20 @@
 
   .countdown-img-container {
     position: absolute;
-    width: 60%;
+    width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin: auto;
     left: 50%;
-    transform: translateX(-50%) rotate(270deg);
+    transform: translateX(-50%);
     top: 0%;
-    opacity: 0.2;
+    max-width: 700px;
   }
 
+
   @media only screen and (min-width: 890px) {
-    .countdown-img-container {
-      width: 48%;
-    }
     .countdown-unit {
       h1 {
         font-size: 130px;
