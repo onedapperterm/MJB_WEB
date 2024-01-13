@@ -1,0 +1,30 @@
+---
+import "../styles/global.scss";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ReservationComponent from "../components/ReservationComponent.astro";
+---
+
+<BaseLayout pageLayout="formular" pageTitle="RSVP">
+  <div class="background-container"></div>
+  <section class="formular-section">
+      <p class="titlle-formular">
+        Nos encantaría oír pronto de ti, <br>por favor llena este formulario para
+        confirmar tu asistencia.
+      </p>
+    <ReservationComponent />
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+    .background-container {
+      background-color: #A3968D;
+    }
+
+    .formular-section {
+        p {
+            color: #5C4433;
+            text-align: center;
+        }
+    }
+  
+</style>
