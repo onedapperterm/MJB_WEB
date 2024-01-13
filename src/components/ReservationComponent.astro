@@ -1,0 +1,88 @@
+---
+import "../styles/global.scss";
+---
+
+
+  <form class="submission-form">
+  
+    <label for="first-name">
+      ¿Asistirás?
+    </label>
+    
+    <input type="text" id="first-name">
+    
+    <label for="last-name">
+    ¿Qué canciones no pueden faltar en la fiesta?  </label>
+    
+    <input type="text" id="last-name">
+    
+    <label for="email">
+        ¿Tienes alguna alergia?
+    </label>
+    
+    <input type="email" id="email">
+    
+    <label for="phone">
+      ¿Tienes alguna sugerencia para alegrar la fiesta?
+    </label>
+    
+    <input type="tel" id="phone">
+    
+    
+    <label for="message">
+      Déjanos un mensaje
+    </label>
+    
+    <textarea id="message"></textarea>
+    
+    <input type="submit" value="Enviar" id="sendBtn">
+    
+    
+    
+  </form>
+
+
+<style lang="scss">
+
+.submission-form{
+  max-width:800px;
+  margin:2rem auto;
+  background-color: #E8DED2;
+  padding:5rem;
+  border-radius:8px;
+  label{
+    display:block;
+    padding:1rem 0 .25rem;
+    text-transform:uppercase;
+    font-size:14px;
+  }
+  input, textarea{
+    display:block;
+    width:100%;
+    border:0;
+    outline:0;
+    border-bottom:1px solid #5C4433;
+    padding:.5rem;
+    font-size:18px;
+    background:transparent;
+  }
+  
+}
+
+#sendBtn{
+  border:1px solid #5C4433;
+  background:transparent;
+  padding:.5rem;
+  color:#5C4433;
+  margin:1rem 0;
+  width:auto;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.3s background ease;
+  border-radius: 4px;
+  &:hover{
+    background: #5C4433;
+    color: white;
+  }
+}
+</style>
