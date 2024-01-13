@@ -1,13 +1,15 @@
 * {
   box-sizing: border-box;
-  --font-color: white;
+  --font-light-color: white;
+  --font-dark-color: #5C4433;
+  --mobile-view-breakpoint: 860px;
 }
 
 h1 {
   font-family: 'Qwitcher Grypen', cursive;
   font-size: 128px;
   font-weight: 100; 
-  color: white;
+  color: var(--font-light-color);
 }
 
 h2 {
@@ -15,22 +17,30 @@ h2 {
   font-size: 16px;
   text-align: center;
   margin: 0;
+  color: var(--font-light-color);
 }
 
 h3 {
   font-family: 'Qwitcher Grypen', cursive;
   font-size: 65px;
   font-weight: normal;
-  color: #5C4433;
+  color: var(--font-dark-color);
   margin: 0;
-
 }
 
 p {
   font-family: 'Alice', serif;
   font-size: 20px;
   font-weight: normal;
-  color: #5C4433;
+  color: var(--font-dark-color);
+}
+
+.text-light {
+  color: var(--font-light-color) !important;
+}
+
+.text-dark {
+  color: var(--font-dark-color) !important;
 }
 
 body {
@@ -38,13 +48,6 @@ body {
   height: 100dvh;
   margin: 0%;
   box-sizing: border-box;
-}
-
-.main-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--font-color);
 }
 
 .background-container {
