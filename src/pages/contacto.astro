@@ -1,6 +1,8 @@
 ---
 import "../styles/global.scss";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const imageUrl: string = 'https://images.pexels.com/photos/18622070/pexels-photo-18622070/free-photo-of-strasse-landschaft-mann-paar.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 ---
 
 <BaseLayout pageLayout="contacto" pageTitle="Contáctanos">
@@ -8,7 +10,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="contact-section">
     <div class="image-container">
       <img
-        src="https://images.pexels.com/photos/18622070/pexels-photo-18622070/free-photo-of-strasse-landschaft-mann-paar.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        src={imageUrl}
         alt="nosotros"
         class="left-image"
       />
@@ -28,7 +30,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   .contact-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     padding: 7ch 5ch;
     align-items: center;
 
@@ -39,6 +41,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       display: flex;
       align-items: center;
       justify-content: center;
+      justify-self: center;
 
       .left-image {
         width: 80%;
@@ -71,21 +74,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       .image-container {
         width: 100%;
-        height: 100%;
-        background-color: transparent;
+        // height: 80%;
         position: fixed;
         z-index: -1;
         top: 0;
-        align-items: flex-start;
+        background: url('https://images.pexels.com/photos/18622070/pexels-photo-18622070/free-photo-of-strasse-landschaft-mann-paar.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        opacity: 0.5;
+        background-position: bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
 
         .left-image {
-          width: auto;
-          opacity: 55%;
-          height: calc(100% - 100px);
+          display: none;
         }
       }
 
       .title-of-contact {
+
         background-color: #5c4433;
         text-align: center;
         width: 80%;

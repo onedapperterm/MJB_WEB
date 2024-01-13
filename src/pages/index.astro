@@ -17,7 +17,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       </picture>
     </div>
 
-    <section class="main-content">
+    <section class="main-content text-light">
       <h2 class="save-the-date">SAVE THE DATE</h2>
       <div class="main-title">
         <h1>May <span>&</span> Juli</h1>
@@ -34,14 +34,23 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
 
 <style lang="scss">
-  .date .date-number {
-    text-align: center;
-    font-size: 32px;
-    border-left: 1px var(--font-color) solid;
-    border-right: 1px var(--font-color) solid;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100svh - 80px);
+  gap: 2ch;
+}
+
+.date .date-number {
+  text-align: center;
+  font-size: 32px;
+  border-left: 1px var(--font-light-color) solid;
+  border-right: 1px var(--font-light-color) solid;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 
 

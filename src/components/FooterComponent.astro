@@ -1,10 +1,10 @@
 ---
-
+import "../styles/global.scss";
 ---
 
-<footer>
-  <h3>¡nos vemos en la fiesta!</h3>
-  <p>
+<footer >
+  <h3 class="text-light">¡nos vemos en la fiesta!</h3>
+  <p class="text-light">
     Estamos impacientes por ver a todos nuestros queridos amigos y familiares en
     la boda. Si, por casualidad, no pueden venir, les rogamos que nos lo
     comuniquen con antelación.
@@ -12,7 +12,7 @@
   <button>RSVP</button>
 </footer>
 
-<style>
+<style lang="scss">
   footer {
     background-color: #a3968d;
     text-align: center;
@@ -20,19 +20,19 @@
     padding-bottom: 8ch;
   }
   h3 {
-    color: white;
     font-size: 70px;
   }
+
   p {
     ont-family: "Alice", serif;
     font-size: 19px;
     font-weight: normal;
     max-width: 60%;
-    color: white;
     margin: auto;
     padding: 4ch;
     line-height: 25px;
   }
+
   button {
     font-family: Alice;
     background-color: transparent;
@@ -45,13 +45,7 @@
     padding: 9px 30px;
   }
 
-  @media only screen and (min-width: 890px) {
-   
-  }
 
-  @media only screen and (max-width: 620px) {
-
-  }
 
   @media only screen and (max-width: 420px) {
     footer {

@@ -35,7 +35,7 @@ export const HISTORY_CHECKPOINTS: any[] = [
     "Eramos solamente amigos al principio, pero durante los lockdowns...",
     icon: "fa-regular fa-heart fa-2xl",
     image:
-    "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2Ffriends.jpg?alt=media&token=d19fd13e-72c7-4e51-bae5-70b5d67f5de3",
     imageAlt: "first-img",
     direction: "right"
   },
@@ -45,7 +45,7 @@ export const HISTORY_CHECKPOINTS: any[] = [
     "Sin darnos cuenta, y gracias a las \"circunstancias mundiales\",  nos fuimos acercando el uno al otro.",
     icon: "fa-regular fa-heart fa-2xl",
     image:
-    "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2Fcovid.jpg?alt=media&token=69661e34-7a64-48c6-b23b-d11ba60fc431",
     imageAlt: "first-img",
     direction: "left"
   },
@@ -55,17 +55,17 @@ export const HISTORY_CHECKPOINTS: any[] = [
     "No podiamos vivir el uno sin el otro, asi que decidimos vivir juntos!",
     icon: "fa-regular fa-heart fa-2xl",
     image:
-    "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2F1st_house.jpg?alt=media&token=45c21d6d-6ad1-4e57-bad8-49ee5027f847",
     imageAlt: "first-img",
     direction: "right"
   },
   {
-    title: "...",
+    title: "Juli propuso y May acepto!",
     description:
-    "...",
+    "Asi que pronto seremos marido y mujer! y queremos que nos acompañes en ese día tan especial",
     icon: "fa-regular fa-heart fa-2xl",
     image:
-    "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2Fcartagena.jpg?alt=media&token=3480a74b-b9a5-4625-a448-41d805cf2356",
     imageAlt: "first-img",
     direction: "left"
   },
