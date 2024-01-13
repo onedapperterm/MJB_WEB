@@ -3,43 +3,39 @@ import "../styles/global.scss";
 ---
 
 
-  <form class="submission-form">
-  
-    <label for="first-name">
-      ¿Asistirás?
-    </label>
-    
-    <input type="text" id="first-name">
-    
-    <label for="last-name">
+<form class="submission-form">
+
+  <label for="first-name">
+    ¿Asistirás?
+  </label>
+  <input type="text" id="first-name">
+
+  <label for="last-name">
     ¿Qué canciones no pueden faltar en la fiesta?  </label>
-    
-    <input type="text" id="last-name">
-    
-    <label for="email">
-        ¿Tienes alguna alergia?
-    </label>
-    
-    <input type="email" id="email">
-    
-    <label for="phone">
-      ¿Tienes alguna sugerencia para alegrar la fiesta?
-    </label>
-    
-    <input type="tel" id="phone">
-    
-    
-    <label for="message">
-      Déjanos un mensaje
-    </label>
-    
-    <textarea id="message"></textarea>
-    
-    <input type="submit" value="Enviar" id="sendBtn">
-    
-    
-    
-  </form>
+  <input type="text" id="last-name">
+
+  <label for="email">
+    ¿Tienes alguna alergia?
+  </label>
+  <input type="email" id="email">
+
+  <label for="phone">
+    ¿Tienes alguna sugerencia para alegrar la fiesta?
+  </label>
+  <input type="tel" id="phone">
+
+
+  <label for="message">
+    Déjanos un mensaje
+  </label>
+  <textarea id="message"></textarea>
+
+  <input type="submit" value="Enviar" id="sendBtn">
+
+</form>
+
+<pre id="preview" style="text-align: center">--</pre>
+
 
 
 <style lang="scss">
@@ -86,3 +82,35 @@ import "../styles/global.scss";
   }
 }
 </style>
+
+<script>
+
+const formElement: HTMLFormElement = document.querySelector("form") as HTMLFormElement;
+
+const prevElement = document.getElementById("preview");
+
+formElement.addEventListener("submit", async e => {
+
+  e.preventDefault();
+  // const formData = new FormData(formElement);
+
+  const testThis = {youSay: 'cool'};
+
+  // console.log(formData.entries());
+
+  const response = await fetch("/api/auth/signin", {
+    method: "POST",
+    body: JSON.stringify(testThis),
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+
+  const data = await response.json();
+  console.log(data);
+
+  if(prevElement && prevElement.innerHTML) prevElement.innerHTML = Object.values(data).join(" ") + "!";
+
+});
+
+</script>
