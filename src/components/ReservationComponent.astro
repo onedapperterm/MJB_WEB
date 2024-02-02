@@ -30,12 +30,11 @@ import "../styles/global.scss";
   </label>
   <textarea id="message"></textarea>
 
-  <input type="submit" value="Enviar" id="sendBtn">
+  <button type="submit"  id="sendBtn">
+    Enviar
+  </button>
 
 </form>
-
-<pre id="preview" style="text-align: center">--</pre>
-
 
 
 <style lang="scss">
@@ -46,41 +45,8 @@ import "../styles/global.scss";
   background-color: #E8DED2;
   padding:5rem;
   border-radius:8px;
-  label{
-    display:block;
-    padding:1rem 0 .25rem;
-    text-transform:uppercase;
-    font-size:14px;
-  }
-  input, textarea{
-    display:block;
-    width:100%;
-    border:0;
-    outline:0;
-    border-bottom:1px solid #5C4433;
-    padding:.5rem;
-    font-size:18px;
-    background:transparent;
-  }
-  
 }
 
-#sendBtn{
-  border:1px solid #5C4433;
-  background:transparent;
-  padding:.5rem;
-  color:#5C4433;
-  margin:1rem 0;
-  width:auto;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:.3s background ease;
-  border-radius: 4px;
-  &:hover{
-    background: #5C4433;
-    color: white;
-  }
-}
 </style>
 
 <script>
@@ -95,7 +61,7 @@ formElement.addEventListener("submit", async e => {
   // const formData = new FormData(formElement);
 
   const testUser = {
-    guestName: 'Victor Manuel Lopez',
+    guestName: 'Victor Lopez',
     passwor: 'moinmoin'
   };
 

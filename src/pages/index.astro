@@ -1,82 +1,124 @@
 ---
 import "../styles/global.scss";
-import BaseLayout from "../layouts/BaseLayout.astro"
 
+export interface GuestLoginDto {
+  firstName: string,
+  lastName: string,
+  password: string
+}
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const firstName = data.get("firstName") as string;
+    const lastName = data.get("lastName") as string;
+    const password = data.get("password") as string;
+
+    const user: GuestLoginDto = {
+      firstName: firstName,
+      lastName: lastName,
+      password: password
+    }
+
+    const response = await fetch("http://localhost:4321/api/auth/signin", {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json"
+      },
+    });
+
+
+    if(response.status === 200) {
+      const validateData = await response.json();
+      console.log('this is the response', validateData);
+      return Astro.redirect("/home");
+    } else {
+      return Astro.redirect("/");
+    }
+
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
-  <BaseLayout pageLayout="home" pageTitle="Home">
-    <div class="background-container">
-      <picture>
-        <source 
-        srcset="https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-        media="(min-width: 600px)" />
-        <img
-          src="https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt="Background"
-          class="main-background"
-        />
-      </picture>
-    </div>
 
-    <section class="main-content text-light">
-      <h2 class="save-the-date">SAVE THE DATE</h2>
-      <div class="main-title">
-        <h1>May <span>&</span> Juli</h1>
-      </div>
-      <div class="date">
-        <h2>SÁBADO</h2>
-        <div class="date-number">21</div>
-        <h2>DICIEMBRE</h2>
-      </div>
-      <h2>VILLA DE LEYVA, COLOMBIA</h2>
-    </section>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+	  <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alice&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Qwitcher+Grypen&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>May&Juli | Boda | 2024</title>
+  </head>
 
-  </BaseLayout>
+  <body class="main-container background-medium">
+    <form class="entrance-form background-light" method="POST">
+      <label for="first-name">
+        Tu primer nombre
+      </label>
+      <input type="text" id="first-name" name="firstName" required minlength="4">
 
+      <label for="last-name">
+        Tu primer apellido
+      </label>
+      <input type="text" id="last-name" name="lastName" required minlength="4">
+
+      <label for="password">
+        Contraseña
+      </label>
+      <input type="password" id="password" name="password" required minlength="6">
+
+      <button type="submit"  id="submitButton">
+        Enviar
+      </button>
+    </form>
+  </body>
+
+</html>
 
 <style lang="scss">
 
-.main-content {
+.main-container {
+  width: 100vw;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 1fr;
+}
+
+.entrance-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: calc(100svh - 80px);
-  gap: 2ch;
+  align-items: flex-start;
+  gap: 1ch;
+  padding: 2ch 4ch;
+  min-width: 500px;
 }
 
-.date .date-number {
-  text-align: center;
-  font-size: 32px;
-  border-left: 1px var(--font-light-color) solid;
-  border-right: 1px var(--font-light-color) solid;
-  padding-left: 5px;
-  padding-right: 5px;
-}
+@media screen and (max-width: 500px) {
 
-
-
-.date .date-number:hover {
-  scale: 1.2;
-}
-
-.date {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.main-title {
-  span {
-    font-family: "Alice", serif;
-    font-size: 48px;
+  .entrance-form {
+    min-width: 100vw;
   }
 
-  h1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
 }
+
 </style>
+

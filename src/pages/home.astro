@@ -1,0 +1,82 @@
+---
+import "../styles/global.scss";
+import BaseLayout from "../layouts/BaseLayout.astro"
+
+---
+  <BaseLayout pageLayout="home" pageTitle="Home">
+    <div class="background-container">
+      <picture>
+        <source 
+        srcset="https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+        media="(min-width: 600px)" />
+        <img
+          src="https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          alt="Background"
+          class="main-background"
+        />
+      </picture>
+    </div>
+
+    <section class="main-content text-light">
+      <h2 class="save-the-date">SAVE THE DATE</h2>
+      <div class="main-title">
+        <h1>May <span>&</span> Juli</h1>
+      </div>
+      <div class="date">
+        <h2>SÁBADO</h2>
+        <div class="date-number">21</div>
+        <h2>DICIEMBRE</h2>
+      </div>
+      <h2>VILLA DE LEYVA, COLOMBIA</h2>
+    </section>
+
+  </BaseLayout>
+
+
+<style lang="scss">
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100svh - 80px);
+  gap: 2ch;
+}
+
+.date .date-number {
+  text-align: center;
+  font-size: 32px;
+  border-left: 1px var(--font-light-color) solid;
+  border-right: 1px var(--font-light-color) solid;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+
+.date .date-number:hover {
+  scale: 1.2;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-title {
+  span {
+    font-family: "Alice", serif;
+    font-size: 48px;
+  }
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+</style>
