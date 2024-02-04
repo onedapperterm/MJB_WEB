@@ -20,7 +20,7 @@ if (Astro.request.method === "POST") {
       password: password
     }
 
-    const response = await fetch("http://localhost:4321/api/auth/signin", {
+    const response = await fetch("https://bodamayyjuli.netlify.app/api/auth/signin", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
