@@ -14,13 +14,16 @@ export const POST: APIRoute = async ({ request }) => {
   try {
 
     const guestLogin = {
-      firstName: body.firstName,
+      firstName: (body.firstName as string).toLowerCase(),
       lastName: body.lastName,
       password: body.password
     }
 
     const guestsSnapshot = await firestore.collection('guests').get();
-    const guestList: Guest[] = guestsSnapshot.docs.map(doc => doc.data() as Guest);
+    const guestList: Guest[] = guestsSnapshot.docs.map((doc: any) => {
+          let guest: Guest =  doc.data() as Guest;
+          return {...guest, ...{familyName: guest?.familyName.toLowerCase()}};
+        });
 
     const guest: Guest | undefined = guestList.find(guest => guest.familyName.includes(guestLogin.firstName));
     if (!guest || guestLogin.password != "12341234") {
