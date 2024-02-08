@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { firestore } from "../../../firebase/server";
+import { serialize } from 'cookie';
 
 const COOKIE_NAME = 'bmjToken';
 
@@ -35,9 +36,16 @@ export const POST: APIRoute = async ({ request }) => {
     } else {
 
       const authToken = 'boda_may_juli_test_token'; // TODO:generate a secure token here
-      const maxAge = 60 * 60 * 24 * 1;
 
-      const cookieHeader = `${COOKIE_NAME}=${authToken}; Max-Age=${maxAge}; Path=/; HttpOnly; Secure; SameSite=Strict`
+      const cookieOptions = {
+        httpOnly: true,
+        secure: true,
+        sameSite: true,
+        maxAge: 60 * 60 * 24 * 1, // cookie expiration time
+        path: '/', 
+      };
+
+      const cookieHeader = serialize(COOKIE_NAME, authToken, cookieOptions);
 
       return new Response(JSON.stringify({cookie: cookieHeader}), {
         status: 200,
