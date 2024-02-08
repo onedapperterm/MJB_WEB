@@ -1,5 +1,8 @@
 import type { APIRoute } from "astro";
 import { firestore } from "../../../firebase/server";
+import { serialize } from 'cookie';
+
+const COOKIE_NAME = 'bmjToken';
 
 export interface Guest {
   amount: number;
@@ -9,6 +12,7 @@ export interface Guest {
 }
 
 export const POST: APIRoute = async ({ request }) => {
+
   const body = await request.json();
 
   try {
@@ -26,11 +30,29 @@ export const POST: APIRoute = async ({ request }) => {
         });
 
     const guest: Guest | undefined = guestList.find(guest => guest.familyName.includes(guestLogin.firstName));
+
     if (!guest || guestLogin.password != "12341234") {
       return new Response( JSON.stringify({error: 'wrong password or user'}), { status: 400 });
     } else {
-      // logic to create the cookie or session
-      return new Response(JSON.stringify(guest), {status: 200});
+
+      const authToken = 'boda_may_juli_test_token'; // TODO:generate a secure token here
+
+      const cookieOptions = {
+        httpOnly: true,
+        secure: true,
+        sameSite: true,
+        maxAge: 60 * 60 * 24 * 1, // cookie expiration time
+        path: '/', 
+      };
+
+      const cookieHeader = serialize(COOKIE_NAME, authToken, cookieOptions);
+
+      return new Response(JSON.stringify({cookie: cookieHeader}), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     }
 
   } catch (error) {

@@ -8,6 +8,7 @@ export interface GuestLoginDto {
 }
 
 if (Astro.request.method === "POST") {
+
   try {
     const data = await Astro.request.formData();
     const firstName = data.get("firstName") as string;
@@ -28,11 +29,11 @@ if (Astro.request.method === "POST") {
       },
     });
 
-
-    if(response.status === 200) {
-      const validateData = await response.json();
-      console.log('this is the response', validateData);
-      return Astro.redirect("/home");
+    const cookie = await response.json();
+    if(response.status === 200 && cookie) {
+      let redirectResponse = Astro.redirect("/home");
+      redirectResponse.headers.set('Set-Cookie', cookie.cookie)
+      return redirectResponse;
     } else {
       return Astro.redirect("/");
     }
