@@ -1,14 +1,17 @@
 import type { APIRoute } from "astro";
 import { firestore } from "../../../firebase/server";
 import { serialize } from 'cookie';
+import type { DocumentData } from "firebase-admin/firestore";
 
 const COOKIE_NAME = 'bmjToken';
 
 export interface Guest {
-  amount: number;
-  familyName: string;
-  checked: boolean;
-  confirmed: boolean;
+  reference: string;
+  firstName: string;
+  lastName: string;
+  allowed: boolean;
+  checked: boolean; //TODO: implement logic to persist checked
+  confirmed: boolean; //TODO: implement logic to persist confirmed
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -17,21 +20,19 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
 
-    const guestLogin = {
-      firstName: (body.firstName as string).toLowerCase(),
-      lastName: body.lastName,
-      password: body.password
-    }
+    const firstName = capitalizeWord(body.firstName);
+    const lastName = capitalizeWord(body.lastName);
+    const password = body.password || '';
 
-    const guestsSnapshot = await firestore.collection('guests').get();
-    const guestList: Guest[] = guestsSnapshot.docs.map((doc: any) => {
-          let guest: Guest =  doc.data() as Guest;
-          return {...guest, ...{familyName: guest?.familyName.toLowerCase()}};
-        });
+    const queryRef = firestore.collection('guests')
+      .where('firstName', '==' , firstName)
+      .where('lastName', '==' , lastName);
 
-    const guest: Guest | undefined = guestList.find(guest => guest.familyName.includes(guestLogin.firstName));
+    const querySnapshot = await queryRef.get();
 
-    if (!guest || guestLogin.password != "12341234") {
+    const guest: DocumentData | undefined = querySnapshot?.docs[0]?.data();
+
+    if (!guest || !guest.allowed || password != (guest.firstName + '#boda2024').toLowerCase()) {
       return new Response( JSON.stringify({error: 'wrong password or user'}), { status: 400 });
     } else {
 
@@ -41,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
         httpOnly: true,
         secure: true,
         sameSite: true,
-        maxAge: 60 * 60 * 24 * 1, // cookie expiration time
+        maxAge: 60 * 60 * 24 * 1, // cookie expiration time = 1 day
         path: '/', 
       };
 
@@ -65,3 +66,10 @@ export const POST: APIRoute = async ({ request }) => {
 
 }
 
+function capitalizeWord(word: string | unknown): string {
+  if (typeof word == 'string') {
+    return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
+  } else {
+    return '';
+  }
+}
