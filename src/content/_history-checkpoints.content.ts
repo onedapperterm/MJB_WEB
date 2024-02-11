@@ -10,9 +10,9 @@ export const HISTORY_CHECKPOINTS: any[] = [
     direction: "left"
   },
   {
-    title: "Hamburgo!",
+    title: "¡Hamburgo!",
     description:
-    "LLegamos cada uno por su lado a hacer una nueva vida, sin saber que sorpresa tan hemrosa nos ibamos a llevar.",
+    "LLegamos cada uno por su lado a hacer una nueva vida, sin saber qué sorpresa tan hermosa nos ibamos a llevar.",
     icon: "fa-regular fa-heart fa-2xl",
     image:
     "https://images.unsplash.com/photo-1611822298655-cfc07a6cc1a3?q=80&w=3840&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -32,7 +32,7 @@ export const HISTORY_CHECKPOINTS: any[] = [
   {
     title: "Solo amigos",
     description:
-    "Eramos solamente amigos al principio, pero durante los lockdowns...",
+    "Éramos solamente amigos al principio, pero durante los lockdowns...",
     icon: "fa-regular fa-heart fa-2xl",
     image:
     "https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2Ffriends.jpg?alt=media&token=d19fd13e-72c7-4e51-bae5-70b5d67f5de3",
@@ -52,7 +52,7 @@ export const HISTORY_CHECKPOINTS: any[] = [
   {
     title: "Y cuando nos dimos cuenta",
     description:
-    "No podiamos vivir el uno sin el otro, asi que decidimos vivir juntos!",
+    "No podíamos vivir el uno sin el otro, ¡así que decidimos vivir juntos!",
     icon: "fa-regular fa-heart fa-2xl",
     image:
     "https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2F1st_house.jpg?alt=media&token=45c21d6d-6ad1-4e57-bad8-49ee5027f847",
@@ -60,9 +60,9 @@ export const HISTORY_CHECKPOINTS: any[] = [
     direction: "right"
   },
   {
-    title: "Juli propuso y May acepto!",
+    title: "¡Juli propuso y May aceptó!",
     description:
-    "Asi que pronto seremos marido y mujer! y queremos que nos acompañes en ese día tan especial",
+    "Así que pronto seremos marido y mujer! y queremos que nos acompañes en ese día tan especial",
     icon: "fa-regular fa-heart fa-2xl",
     image:
     "https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2Fcartagena.jpg?alt=media&token=3480a74b-b9a5-4625-a448-41d805cf2356",
