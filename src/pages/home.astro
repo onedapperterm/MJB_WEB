@@ -1,36 +1,40 @@
 ---
 import "../styles/global.scss";
-import BaseLayout from "../layouts/BaseLayout.astro"
+// import BaseLayout from "../layouts/BaseLayout.astro"
+import SinglePageLayout from "../layouts/SinglePageLayout.astro"
 
 ---
-  <BaseLayout pageLayout="home" pageTitle="Home">
-    <div class="background-container">
-      <picture>
-        <source 
+
+<SinglePageLayout>
+  <div class="background-container">
+    <picture>
+      <source 
         srcset="https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2FSAVE_20210824_205528.jpg?alt=media&token=c412e7ed-4cc9-40c4-896f-68bbf09dcd4f" 
         media="(min-width: 600px)" />
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2FSAVE_20210824_205528.jpg?alt=media&token=c412e7ed-4cc9-40c4-896f-68bbf09dcd4f"
-          alt="Background"
-          class="main-background"
-        />
-      </picture>
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/mjb-web-ae899.appspot.com/o/ASSETS%2FSAVE_20210824_205528.jpg?alt=media&token=c412e7ed-4cc9-40c4-896f-68bbf09dcd4f"
+        alt="Background"
+        class="main-background"
+      />
+    </picture>
+    <div class="background-overlay"></div>
+  </div>
+
+  <section class="main-content text-light">
+    <h2 class="save-the-date">SAVE THE DATE</h2>
+    <div class="main-title">
+      <h1>May <span>&</span> Juli</h1>
     </div>
+    <div class="date">
+      <h2>SÁBADO</h2>
+      <div class="date-number">21</div>
+      <h2>DICIEMBRE</h2>
+    </div>
+    <h2>HACIENDA SANTA CECILIA</h2>
+    <h4>Sáchica, Boyacá</h4>
+  </section>
 
-    <section class="main-content text-light">
-      <h2 class="save-the-date">SAVE THE DATE</h2>
-      <div class="main-title">
-        <h1>May <span>&</span> Juli</h1>
-      </div>
-      <div class="date">
-        <h2>SÁBADO</h2>
-        <div class="date-number">21</div>
-        <h2>DICIEMBRE</h2>
-      </div>
-      <h2>VILLA DE LEYVA, COLOMBIA</h2>
-    </section>
-
-  </BaseLayout>
+</SinglePageLayout>
 
 
 <style lang="scss">
@@ -40,8 +44,14 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: calc(100svh - 80px);
+  // height: calc(100svh - 80px);
+  height: 100dvh; //Remove on full content version
   gap: 2ch;
+
+  h4 {
+    text-align: center;
+    margin-top: -10px;
+  }
 }
 
 .date .date-number {
@@ -53,10 +63,9 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   padding-right: 5px;
 }
 
-
-
-.date .date-number:hover {
-  scale: 1.2;
+//Remove on full content version
+.save-the-date {
+  font-size: xx-large;
 }
 
 .date {
@@ -65,6 +74,10 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  h2 {
+    min-width: 100px;
+  }
 }
 
 .main-title {
