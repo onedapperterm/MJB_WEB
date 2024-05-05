@@ -32,9 +32,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     const guest: DocumentData | undefined = querySnapshot?.docs[0]?.data();
 
-    if (!guest || !guest.allowed || password != (guest.firstName + '#boda2024').toLowerCase()) {
+    if (!guest || !guest.allowed || password != (guest.firstName + 'boda2024').toLowerCase()) {
       return new Response( JSON.stringify({error: 'wrong password or user'}), { status: 400 });
     } else {
+      console.log('User logged in:', guest.firstName, guest.lastName);
 
       const authToken = 'boda_may_juli_test_token'; // TODO:generate a secure token here
 
