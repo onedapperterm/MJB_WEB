@@ -85,10 +85,16 @@ import SinglePageLayout from "../layouts/SinglePageLayout.astro"
 
   h1 {
     display: flex;
-    margin: 0;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  .main-title {
+    h1 {
+      margin: 0;
+    }
   }
 }
 </style>

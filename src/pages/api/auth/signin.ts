@@ -43,7 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
         httpOnly: true,
         secure: true,
         sameSite: true,
-        maxAge: 60 * 60 * 24 * 1, // cookie expiration time = 1 day
+        maxAge: 60 * 60 * 24 * 7, // cookie expiration time = 7 days
         path: '/', 
       };
 
