@@ -47,11 +47,11 @@ import SinglePageLayout from "../layouts/SinglePageLayout.astro"
   align-items: center;
   // height: calc(100dvh - 80px);
   height: 100dvh; //Remove on full content version
-  // height: 100%;
   gap: 2ch;
 
   h4 {
     text-align: center;
+    margin: 0;
   }
 }
 
@@ -90,10 +90,11 @@ import SinglePageLayout from "../layouts/SinglePageLayout.astro"
     text-align: center;
   }
 }
+
 @media screen and (max-width: 600px) {
   .main-title {
     h1 {
-      margin: 0;
+      margin: 15px 0;
     }
   }
 }
