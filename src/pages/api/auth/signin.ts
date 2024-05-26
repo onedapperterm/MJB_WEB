@@ -33,6 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
     const guest: DocumentData | undefined = querySnapshot?.docs[0]?.data();
 
     if (!guest || !guest.allowed || password != ('boda2024').toLowerCase()) {
+      console.log('Wrong password or user:', firstName, lastName);
       return new Response( JSON.stringify({error: 'wrong password or user'}), { status: 400 });
     } else {
       console.log('User logged in:', guest.firstName, guest.lastName);

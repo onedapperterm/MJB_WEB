@@ -1,11 +1,10 @@
 ---
 import "../styles/global.scss";
-// import BaseLayout from "../layouts/BaseLayout.astro"
-import SinglePageLayout from "../layouts/SinglePageLayout.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
 
 ---
 
-<SinglePageLayout>
+<BaseLayout>
   <div class="background-container">
     <picture>
       <source 
@@ -33,20 +32,19 @@ import SinglePageLayout from "../layouts/SinglePageLayout.astro"
     <h2>HACIENDA SANTA CECILIA</h2>
     <h4>Sáchica, Boyacá</h4>
   </section>
-
-</SinglePageLayout>
+</BaseLayout>
 
 
 <style lang="scss">
 
 .main-content {
-  width: 100dvw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // height: calc(100dvh - 80px);
-  height: 100dvh; //Remove on full content version
+  height: calc(100dvh - 80px);
+  // height: 100dvh; //Remove on full content version
   gap: 2ch;
 
   h4 {
