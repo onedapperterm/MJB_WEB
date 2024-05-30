@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const firstName = capitalizeWord(body.firstName);
     const lastName = capitalizeWord(body.lastName);
-    const password = body.password || '';
+    const password = (body.password || '').replace(/\s/g, '').toLowerCase();
 
     const queryRef = firestore.collection('guests')
       .where('firstName', '==' , firstName)
