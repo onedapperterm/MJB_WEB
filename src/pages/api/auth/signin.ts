@@ -5,15 +5,6 @@ import type { DocumentData } from "firebase-admin/firestore";
 
 const COOKIE_NAME = 'bmjToken';
 
-export interface Guest {
-  reference: string;
-  firstName: string;
-  lastName: string;
-  allowed: boolean;
-  checked: boolean; //TODO: implement logic to persist checked
-  confirmed: boolean; //TODO: implement logic to persist confirmed
-}
-
 export const POST: APIRoute = async ({ request }) => {
 
   const body = await request.json();
@@ -33,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     const guest: DocumentData | undefined = querySnapshot?.docs[0]?.data();
 
     if (!guest || !guest.allowed || password != ('boda2024').toLowerCase()) {
-      console.log('Wrong password or user:', firstName, lastName);
+      console.log('Wrong password or user:', firstName, lastName, password, guest?.allowed);
       return new Response( JSON.stringify({error: 'wrong password or user'}), { status: 400 });
     } else {
       console.log('User logged in:', guest.firstName, guest.lastName);

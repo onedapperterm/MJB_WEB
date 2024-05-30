@@ -10,7 +10,7 @@ async function auth({request}: APIContext, next: MiddlewareNext) {
 
   const isAuthenticated = checkAuthentication(request);
   const isPublicUrl = url.pathname == "/api/auth/signin" || url.pathname == "/";
-  const allowedUrls = ["/home", "/boda", "/historia", "/404"];
+  const allowedUrls = ["/home", "/boda", "/historia", "/404", "/backoffice/guests", "/api/guests/guests", ];
 
   if(!isAuthenticated && isPublicUrl) {
     const response = await next();
@@ -21,9 +21,9 @@ async function auth({request}: APIContext, next: MiddlewareNext) {
     return new Response( 'authorized user -> redirected', { status: 302, headers: { location: "/home" } });
   }
 
-  if (!isAuthenticated) {
-    return new Response( 'unauthorized user -> redirected', { status: 302, headers: { location: "/" } });
-  }
+  // if (!isAuthenticated) {
+  //   return new Response( 'unauthorized user -> redirected', { status: 302, headers: { location: "/" } });
+  // }
 
   if(!allowedUrls.includes(url.pathname)) {
     return new Response( 'authorized user -> redirected', { status: 302, headers: { location: "/home" } });
