@@ -11,30 +11,18 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
 
-    const firstName = capitalizeWord(body.firstName);
-    const lastName = capitalizeWord(body.lastName);
-    const password = (body.password || '').replace(/\s/g, '').toLowerCase();
+    const firstName = body.firstName;
+    const lastName = body.lastName;
+    const password = (body.password || '').replace(/\s/g, '')
 
-    console.log(body);
-
-    const queryRef = firestore.collection('guests')
-      .where('firstName', '==' , firstName)
-      .where('lastName', '==' , lastName);
-
-    const querySnapshot = await queryRef.get();
-
-    const guest: DocumentData | undefined = querySnapshot?.docs[0]?.data();
-
-
-    if(guest.firstName == 'John' && guest.lastName == 'Carvajal') {
-      return getLoginResponse();
-    }
-
-    if (!guest || !guest.allowed || password != ('boda2024').toLowerCase()) {
-      console.log('Wrong password or user:', firstName, lastName, password, guest?.allowed);
+    if (password != ('boda2024').toLowerCase()) {
+      console.log('Wrong password or user:', firstName, lastName, password);
       return new Response( JSON.stringify({error: 'wrong password or user'}), { status: 400 });
+
     } else {
-      console.log('User logged in:', guest.firstName, guest.lastName);
+      const guest: DocumentData | undefined = await fetchGuest(firstName, lastName);
+      if(guest) console.log('User logged in:', guest.firstName, guest.lastName);
+      else console.log('User not found:', firstName, lastName);
 
       return getLoginResponse();
     }
@@ -47,6 +35,16 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+}
+
+async function fetchGuest(firstName: string, lastName: string): Promise<DocumentData | undefined>{
+  const queryRef = firestore.collection('guests')
+    .where('firstName', '==' , firstName)
+    .where('lastName', '==' , lastName);
+
+  const querySnapshot = await queryRef.get();
+
+  return querySnapshot?.docs[0]?.data();
 }
 
 function getLoginResponse() {
@@ -68,12 +66,4 @@ function getLoginResponse() {
       'Content-Type': 'application/json',
     },
   });
-}
-
-function capitalizeWord(word: string | unknown): string {
-  if (typeof word == 'string') {
-    return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
-  } else {
-    return '';
-  }
 }
