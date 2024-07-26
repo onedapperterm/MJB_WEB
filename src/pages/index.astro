@@ -1,13 +1,8 @@
 ---
 import "../styles/global.scss";
+import type { GuestLoginDto } from "../model/guest.data"
 
 const API_URL: string = import.meta.env.APP_BASE_URL;
-
-export interface GuestLoginDto {
-  firstName: string,
-  lastName: string,
-  password: string
-}
 
 if (Astro.request.method === "POST") {
 
@@ -31,11 +26,20 @@ if (Astro.request.method === "POST") {
       },
     });
 
-    const cookie = await response.json();
-    if(response.status === 200 && cookie) {
-      let redirectResponse = Astro.redirect("/home");
-      redirectResponse.headers.set('Set-Cookie', cookie.cookie)
-      return redirectResponse;
+    const loginData = await response.json();
+
+
+    if(response.status === 200 && loginData) {
+
+      Astro.cookies.set("session_token", loginData.token, {
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/',
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict'
+      });
+
+      return Astro.redirect("/home");
     } else {
       return Astro.redirect("/?loginFail=true");
     }

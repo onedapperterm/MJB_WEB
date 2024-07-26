@@ -2,30 +2,140 @@
 import "../styles/global.scss";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ReservationComponent from "../components/ReservationComponent.astro";
+import { confirmGuest, updateGuestsBatch } from "../firebase/services/setters";
+import type { Guest, GuestConfirmationDTO } from "../model/guest.data";
+import { fetchGuestById, fetchGuestsByReference } from "@/firebase/services/getters";
+
+const cookies = Astro.request.headers.get('Cookie') 
+const sessionId = cookies?.split(';').find((cookie) => cookie.includes('session'))?.split('=')[1]
+const userId = sessionId?.split('_')[1]
+
+if (!userId) {
+  return Astro.redirect('/login')
+}
+
+const guest = userId !== 'unchecked' ? await fetchGuestById(userId) : null;
+let relatedGuests = guest?.reference ? await fetchGuestsByReference(guest.reference) : null;
+
+if(relatedGuests && relatedGuests?.length > 0) {
+  relatedGuests = relatedGuests.filter((relatedGuest) => relatedGuest.id !== userId);
+}
+
+const justSubmitted = Astro.url.searchParams.get('submitted') === 'true';
+const error = Astro.url.searchParams.get('error') === 'true';
+
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+
+  let songs: string[] = []
+  try {
+    if(data.get('songsArray')) songs = JSON.parse(data.get('songsArray') as string);
+  } catch (error) {
+    console.error('error parsing songs', error);
+  }
+
+  let allergies: string[] = []
+  try {
+    if(data.get('allergiesArray')) allergies = JSON.parse(data.get('allergiesArray') as string);
+  } catch (error) {
+    console.error('error parsing allergies', error);
+  }
+
+  let relatedConfirmedGuestsIds: string[] | null = null;
+  try {
+    if(data.get('relatedGuestsIds')) relatedConfirmedGuestsIds = JSON.parse(data.get('relatedGuestsIds') as string);
+  } catch (error) {
+    console.error('error parsing guests ids', error);
+  }
+
+  const confirmationData: GuestConfirmationDTO = {
+    firstName: (guest ? guest.firstName : data.get('firstName')) as string,
+    lastName: (guest ? guest.lastName : data.get('lastName')) as string,
+    attendance: data.get('attendance') === 'on',
+    stayAtHotel: data.get('stayAtHotel') === 'on',
+    songSuggestions: songs,
+    allergies: allergies,
+    partySuggestions: data.get('partySuggestions') as string,
+    message: data.get('message') as string,
+    referencia: data.get('referencia') as string,
+    updatedAt: new Date().toISOString(),
+  };
+
+  const success = await confirmGuest(confirmationData);
+
+  if(relatedConfirmedGuestsIds && relatedGuests) {
+    const updatedGuests: Guest[] = relatedGuests
+      .filter((relatedGuest) => relatedConfirmedGuestsIds?.includes(relatedGuest.id))
+      .map(guest => ({...guest, attendance: true, updatedAt: new Date().toISOString(), confirmed: true}));
+
+    try {
+      await updateGuestsBatch(updatedGuests);
+    } catch (error) {
+      console.error('error updating related guests', error);
+    }
+  }
+
+  const params = success ? '?submitted=true' : '?error=true';
+  
+  return Astro.redirect(Astro.url.pathname + params);
+}
 ---
 
 <BaseLayout pageLayout="formular" pageTitle="Invitacion">
   <div class="background-container"></div>
   <section class="formular-section">
-    <p class="titlle-formular">
-      Nos encantaría oír pronto de ti, 
+    {error && (
+      <div class="confirmation-message" id="error-message">
+        <p>Hubo un error al confirmar tu asistencia, por favor intenta de nuevo.</p>
+      </div>
+    )}
+
+    {!justSubmitted && (
+    <p class="title-formular">
+      {guest && guest.firstName + ', '} 
+      nos encantaría oír pronto de ti, 
       <br>por favor llena este formulario para
-        confirmar tu asistencia.
+      confirmar tu asistencia.
     </p>
-    <ReservationComponent />
+    <ReservationComponent guest={guest} relatedGuests={relatedGuests}/>
+    )}
+
+    {justSubmitted && (
+      <div class="confirmation-message">
+        <p>Gracias por confirmar tu asistencia!</p>
+        <p>Te esperamos el 21 de Diciembre a las 4:00 PM en la Hacienda Santa Cecilia.</p>
+      </div>
+    )}
   </section>
 </BaseLayout>
 
 <style lang="scss">
-    .background-container {
-      background-color: #A3968D;
-    }
+.background-container {
+  background-color: #A3968D;
+}
 
-    .formular-section {
-        p {
-            color: #5C4433;
-            text-align: center;
-        }
-    }
-  
+.formular-section {
+  p {
+    color: #5C4433;
+    text-align: center;
+  }
+}
+
+.confirmation-message {
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: #E8DED2;
+  padding: 3rem;
+  border-radius: 8px;
+}
 </style>
+
+<script>
+const errorMessages = document.getElementById('error-message');
+
+if (errorMessages) {
+  setTimeout(() => {
+    window.location.href = '/formular';
+  }, 5000);
+}
+</script>

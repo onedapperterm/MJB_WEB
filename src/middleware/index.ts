@@ -1,8 +1,10 @@
+import { TOKEN_PREFIX } from "@/pages/api/auth/signin";
 import type { APIContext, MiddlewareNext } from "astro";
+//@ts-ignore
 import { sequence } from "astro:middleware";
 import { parse } from "cookie";
 
-const COOKIE_NAME = 'bmjToken';
+const COOKIE_NAME = 'session_token';
 
 async function auth({request}: APIContext, next: MiddlewareNext) {
 
@@ -10,7 +12,7 @@ async function auth({request}: APIContext, next: MiddlewareNext) {
 
   const isAuthenticated = checkAuthentication(request);
   const isPublicUrl = url.pathname == "/api/auth/signin" || url.pathname == "/";
-  const allowedUrls = ["/home", "/boda", "/historia", "/404" ];
+  const allowedUrls = ["/home", "/boda", "/historia", "/404", "/formular" ];
 
   if(!isAuthenticated && isPublicUrl) {
     const response = await next();
@@ -38,7 +40,7 @@ export function checkAuthentication(request: Request) {
 
   const authToken = cookies[COOKIE_NAME];
 
-  return authToken == 'boda_may_juli_test_token';
+  return authToken?.startsWith(TOKEN_PREFIX);
 }
 
 export const onRequest = sequence(auth);

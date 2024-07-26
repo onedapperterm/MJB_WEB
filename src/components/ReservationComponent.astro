@@ -1,72 +1,330 @@
 ---
+import type { Guest } from "@/model/guest.data";
 import "../styles/global.scss";
+const {guest, relatedGuests} = Astro.props;
 ---
 
+<form id="confirmationForm" class="submission-form" method="POST">
+  <div class="form-group">
+    <label for="firstName">First Name:</label>
+    <input 
+      type="text" 
+      id="firstName" name="firstName" value={guest ? guest.firstName : ''} 
+      disabled={!!guest}
+      required
+    >
+  </div>
 
-<form class="submission-form">
+  <div class="form-group">
+    <label for="lastName">Last Name:</label>
+    <input 
+      type="text" 
+      id="lastName" 
+      name="lastName" 
+      value={guest ? guest.lastName : ''}
+      disabled={!!guest}
+      required>
+  </div>
 
-  <label for="first-name">
-    ¿Asistirás?
-  </label>
-  <input type="text" id="first-name">
+  <p>Asistiras?</p>
 
-  <label for="last-name">
-    ¿Qué canciones no pueden faltar en la fiesta?  </label>
-  <input type="text" id="last-name">
+  <div class="form-group attendance">
+    <label id="checkbox-error" class="hidden">
+      Por favor selecciona una opción:
+    </label>
+    <label for="attendance" class="checkbox-label">
+      <span>Si</span>
+      <input type="checkbox" id="attendance" name="attendance">
+    </label>
+    <label for="absence" class="checkbox-label">
+      <span>No</span>
+      <input type="checkbox" id="absence" name="absence">
+    </label>
+  </div>
 
-  <label for="email">
-    ¿Tienes alguna alergia?
-  </label>
-  <input type="email" id="email">
+  {relatedGuests && relatedGuests.length > 0 && (
+    <p>Invitados relacionados:</p>
+    <div id="related-guests">
+      {relatedGuests.map((relatedGuest: Guest, index: number) => (
+        <div class="related-guest-row" id={'row-' + index}>
+          <input type="checkbox" id={relatedGuest.id} name={relatedGuest.id}>
+          <label for={relatedGuest.id}>{relatedGuest.firstName} {relatedGuest.lastName}</label>
+        </div>
+      ))}
+    </div>
+  )}
 
-  <label for="phone">
-    ¿Tienes alguna sugerencia para alegrar la fiesta?
-  </label>
-  <input type="tel" id="phone">
+  <div id="additionalFields" class="hidden">
+    <div class="form-group">
+      <label for="stayAtHotel" class="checkbox-label">
+        <span>Me quedearé en el Hotel</span>
+        <input type="checkbox" id="stayAtHotel" name="attendance">
+      </label>
+    </div>
 
+    <a href="https://hotelsantacecilia.com.co/ubicacion-contacto-sachica/" target="_blank" rel="noopener noreferrer">
+      <div class="hotel-hint hidden" id="hotel-hint">
+        <p>¡No olvides reservar tu habitación!</p>
+        <p>Puedes hacerlo haciendo click aquí!</p>
+      </div>
+    </a>
 
-  <label for="message">
-    Déjanos un mensaje
-  </label>
-  <textarea id="message"></textarea>
+    <div class="form-group">
+      <label for="songSuggestions">¿Qué canciones no pueden faltar en la fiesta?</label>
+      <input type="text" id="songSuggestions" name="songSuggestions">
+      <button type="button" id="addSong" class="btn">Agrega una canción</button>
+      <ul id="songList" class="item-list"></ul>
+    </div>
 
-  <button type="submit"  id="sendBtn">
-    Enviar
-  </button>
+    <div class="form-group">
+      <label for="allergies">¿Tienes alguna alergia?</label>
+      <input type="text" id="allergies" name="allergies">
+      <button type="button" id="addAllergy" class="btn">Agrega una alergia</button>
+      <ul id="allergyList" class="item-list"></ul>
+    </div>
 
+    <div class="form-group">
+      <label for="partySuggestions">¿Tienes alguna sugerencia para alegrar la fiesta?</label>
+      <textarea id="partySuggestions" name="partySuggestions"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Déjanos un mensaje</label>
+      <textarea id="message" name="message"></textarea>
+    </div>
+
+    <div class="form-group referencia">
+      <label for="referencia">Cual es tu referencia?</label>
+      <input id="referencia" name="referencia"></input>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-submit" id="btn-submit">Enviar</button>
 </form>
 
 
-<style lang="scss">
+<style>
+  .submission-form {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #E8DED2;
+    padding: 3rem;
+    border-radius: 8px;
 
-.submission-form{
-  max-width:800px;
-  margin:2rem 1rem;
-  background-color: #E8DED2;
-  padding:3rem;
-  border-radius:8px;
-}
+    p {
+      color: #5C4433;
+      margin-bottom: 0;
+    }
+  }
 
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .attendance {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .related-guest-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    label {
+      font-size: 1rem;
+      color: #5c4433;
+    }
+
+    input {
+      width: auto;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .hotel-hint {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    
+    p {
+      text-align: center;
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #5c4433; 
+    border-radius: 4px;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-label input {
+    margin-right: 0.5rem;
+    width: auto;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .btn-submit {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .item-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .item-list li {
+    background-color: #f0f0f0;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .referencia {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
 </style>
 
 <script>
 
-const formElement: HTMLFormElement = document.querySelector("form") as HTMLFormElement;
+const form = document.getElementById('confirmationForm') as HTMLFormElement | null;
+  
+if (form) {
+  initForm(form);
+}
 
-// const prevElement = document.getElementById("preview");
+function initForm(form: HTMLFormElement) {
+  const attendanceCheckbox = document.getElementById('attendance') as HTMLInputElement;
+  const absenceCheckbox = document.getElementById('absence') as HTMLInputElement;
+  const checkboxError = document.getElementById('checkbox-error') as HTMLLabelElement;
+  const additionalFields = document.getElementById('additionalFields') as HTMLDivElement;
+  const stayAtHotelCheckbox = document.getElementById('stayAtHotel') as HTMLInputElement;
+  const hotelHint = document.getElementById('hotel-hint') as HTMLDivElement;
+  const songInput = document.getElementById('songSuggestions') as HTMLInputElement;
+  const addSongButton = document.getElementById('addSong') as HTMLButtonElement;
+  const songList = document.getElementById('songList') as HTMLUListElement;
+  const allergyInput = document.getElementById('allergies') as HTMLInputElement;
+  const addAllergyButton = document.getElementById('addAllergy') as HTMLButtonElement;
+  const allergyList = document.getElementById('allergyList') as HTMLUListElement;
 
-formElement.addEventListener("submit", async e => {
+  const songs: string[] = [];
+  const allergies: string[] = [];
 
-  e.preventDefault();
-  // const formData = new FormData(formElement);
+  attendanceCheckbox.checked = false;
+  absenceCheckbox.checked = false;
+  stayAtHotelCheckbox.checked = false;
 
-  // const testUser = {
-  //   guestName: 'Victor Lopez',
-  //   passwor: 'moinmoin'
-  // };
+  attendanceCheckbox.addEventListener('change', () => {
+    additionalFields.classList.toggle('hidden', !attendanceCheckbox.checked);
+    absenceCheckbox.checked = false;
 
-  // console.log(formData.entries());
+    if (attendanceCheckbox.checked) {
+      checkboxError.classList.add('hidden');
+    }
+  });
 
-});
+  absenceCheckbox.addEventListener('change', () => {
+    attendanceCheckbox.checked = false;
+    additionalFields.classList.toggle('hidden', true);
 
+    if (absenceCheckbox.checked) {
+      checkboxError.classList.add('hidden');
+    }
+  });
+
+  stayAtHotelCheckbox.addEventListener('change', () => {
+    hotelHint.classList.toggle('hidden', !stayAtHotelCheckbox.checked);
+  });
+
+  addSongButton.addEventListener('click', () => {
+    addItemToList(songInput, songList, songs);
+  });
+
+  addAllergyButton.addEventListener('click', () => {
+    addItemToList(allergyInput, allergyList, allergies);
+  });
+
+  function addItemToList(input: HTMLInputElement, list: HTMLUListElement, array: string[]) {
+    if (input.value.trim()) {
+      array.push(input.value.trim());
+      const li = document.createElement('li');
+      li.textContent = input.value.trim();
+      list.appendChild(li);
+      input.value = '';
+    }
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const confirmationBoxesStted = attendanceCheckbox.checked || absenceCheckbox.checked;
+    if (!confirmationBoxesStted) {
+      checkboxError.classList.remove('hidden');
+      return;
+    }
+
+
+    const formData = new FormData(form);
+    if(!formData.get('referencia')) {
+      form.appendChild(createHidenInput('songsArray', JSON.stringify(songs)));
+      form.appendChild(createHidenInput('allergiesArray', JSON.stringify(allergies)));
+
+      const relatedGuestsIds = getConfirmedRelatedGuestsIds();
+      if (relatedGuestsIds.length > 0) {
+        form.appendChild(createHidenInput('relatedGuestsIds', JSON.stringify(relatedGuestsIds)));
+      }
+
+      form.submit();
+    }
+  });
+}
+
+function getConfirmedRelatedGuestsIds() {
+  const relatedGuests = document.getElementById('related-guests') as HTMLDivElement;
+  if (!relatedGuests) return [];
+
+  const checkboxes = relatedGuests?.querySelectorAll('input[type="checkbox"]') || [];
+  const checkedCheckboxes = Array.from(checkboxes).filter((checkbox) => (checkbox as HTMLInputElement).checked);
+  return checkedCheckboxes.map((checkbox) => (checkbox as HTMLInputElement).id);
+}
+
+function createHidenInput(name: string, value: string) {
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = name;
+  input.value = value;
+  return input;
+}
 </script>
