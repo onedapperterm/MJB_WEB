@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { fetchGuest } from "../../../firebase/services/getters";
-import type { DocumentData } from "firebase-admin/firestore";
+import type { Guest } from "@/model/guest.data";
+import { updateGuest } from "@/firebase/services/setters";
 
 export const TOKEN_PREFIX = 'BMJ_';
 
@@ -19,10 +20,12 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response( JSON.stringify({error: 'wrong password or user'}), { status: 400 });
 
     } else {
-      const guest: DocumentData | undefined = await fetchGuest(firstName, lastName);
-      if(guest) console.log('User logged in:', guest.firstName, guest.lastName);
+      const guest: Guest | undefined = await fetchGuest(firstName, lastName);
 
-      else console.log('User not found:', firstName, lastName);
+      if(!guest) console.log('User not found:', firstName, lastName)
+      else console.log('User logged in:', guest.firstName, guest.lastName);
+
+      if(!guest?.checked) await updateGuest({ ...guest as Guest, ...{checked: true}})
 
       return getLoginResponse(guest?.id);
     }

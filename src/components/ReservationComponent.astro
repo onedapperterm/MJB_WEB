@@ -5,6 +5,15 @@ const {guest, relatedGuests} = Astro.props;
 ---
 
 <form id="confirmationForm" class="submission-form" method="POST">
+  <div class="loading-overlay hidden" id="loading-overlay">
+    <div class="loading-spinner"></div>
+    Espera un momento...
+  </div>
+
+  <div class="timeout-error hidden" id="timeout-error">
+     Hubo un error al enviar tu confirmación. Por favor intenta de nuevo más tarde :( 
+  </div>
+
   <div class="form-group">
     <label for="firstName">First Name:</label>
     <input 
@@ -58,7 +67,7 @@ const {guest, relatedGuests} = Astro.props;
     <div class="form-group">
       <label for="stayAtHotel" class="checkbox-label">
         <span>Me quedearé en el Hotel</span>
-        <input type="checkbox" id="stayAtHotel" name="attendance">
+        <input type="checkbox" id="stayAtHotel" name="stayAtHotel">
       </label>
     </div>
 
@@ -104,117 +113,159 @@ const {guest, relatedGuests} = Astro.props;
 
 
 <style>
-  .submission-form {
-    max-width: 800px;
-    margin: 2rem auto;
-    background-color: #E8DED2;
-    padding: 3rem;
-    border-radius: 8px;
+.loading-overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  gap: 1rem;
+  pointer-events: none;
+}
 
-    p {
-      color: #5C4433;
-      margin-bottom: 0;
-    }
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #514a46;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+.timeout-error {
+  text-align: center;
+  color: #5C4433;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-
-  .form-group {
-    margin-bottom: 1.5rem;
+  to {
+    transform: rotate(360deg);
   }
+}
 
-  .attendance {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+
+.submission-form {
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: #E8DED2;
+  padding: 3rem;
+  border-radius: 8px;
+
+  p {
+    color: #5C4433;
+    margin-bottom: 0;
   }
+}
 
-  .related-guest-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.form-group {
+  margin-bottom: 1.5rem;
+}
 
-    label {
-      font-size: 1rem;
-      color: #5c4433;
-    }
+.attendance {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
 
-    input {
-      width: auto;
-    }
-  }
+.related-guest-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
   label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-size: 1rem;
+    color: #5c4433;
   }
 
-  a {
-    text-decoration: none;
-    color: inherit;
+  input {
+    width: auto !important;
   }
+}
 
-  .hotel-hint {
-    background-color: #f0f0f0;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    
-    p {
-      text-align: center;
-      font-size: 0.9rem;
-      margin: 0.5rem 0;
-    }
-  }
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
 
-  input[type="text"],
-  textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #5c4433; 
-    border-radius: 4px;
-  }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-  .checkbox-label {
-    display: flex;
-    align-items: center;
-  }
+.hotel-hint {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 0.75rem;
 
-  .checkbox-label input {
-    margin-right: 0.5rem;
-    width: auto;
+  p {
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
   }
+}
 
-  .btn {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-  }
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #5c4433; 
+  border-radius: 4px;
+}
 
-  .btn-submit {
-    display: block;
-    width: 100%;
-    margin-top: 1rem;
-  }
+.checkbox-label {
+  display: flex;
+  align-items: center;
+}
 
-  .item-list {
-    list-style-type: none;
-    padding-left: 0;
-  }
+.checkbox-label input {
+  margin-right: 0.5rem;
+  width: auto;
+}
 
-  .item-list li {
-    background-color: #f0f0f0;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 4px;
-  }
+.btn {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
 
-  .hidden {
-    display: none;
-  }
+.btn-submit {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+}
 
-  .referencia {
-    visibility: hidden;
-    height: 0;
-    width: 0;
-  }
+.item-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.item-list li {
+  background-color: #f0f0f0;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.hidden {
+  display: none;
+}
+
+.referencia {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
 </style>
 
 <script>
@@ -288,6 +339,16 @@ function initForm(form: HTMLFormElement) {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    if(!attendanceCheckbox.checked && !absenceCheckbox.checked) {
+      checkboxError.classList.remove('hidden');
+      return;
+    }
+
+    window.scrollTo(0, 0);
+    disableScroll();
+    
+    const spinner = document.getElementById('loading-overlay') as HTMLDivElement;
+    spinner.classList.remove('hidden');
 
     const confirmationBoxesStted = attendanceCheckbox.checked || absenceCheckbox.checked;
     if (!confirmationBoxesStted) {
@@ -307,6 +368,13 @@ function initForm(form: HTMLFormElement) {
       }
 
       form.submit();
+
+      setTimeout(() => {
+        spinner.classList.add('hidden');
+        const timeoutError = document.getElementById('timeout-error') as HTMLDivElement;
+        timeoutError.classList.remove('hidden');
+        enableScroll();
+      }, 6000);
     }
   });
 }
@@ -327,4 +395,42 @@ function createHidenInput(name: string, value: string) {
   input.value = value;
   return input;
 }
+
+function disableScroll() {
+  window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+  window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+  window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+  window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+
+function enableScroll() {
+  window.removeEventListener('DOMMouseScroll', preventDefault, false);
+  window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
+  window.removeEventListener('touchmove', preventDefault, wheelOpt);
+  window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+function preventDefaultForScrollKeys(e) {
+  if (keys[e.keyCode]) {
+    preventDefault(e);
+    return false;
+  }
+}
+
+var supportsPassive = false;
+try {
+  window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+    get: function () { supportsPassive = true; } 
+  }));
+} catch(e) {}
+
+var wheelOpt = supportsPassive ? { passive: false } : false;
+var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
 </script>

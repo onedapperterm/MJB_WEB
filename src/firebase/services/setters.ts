@@ -65,7 +65,7 @@ async function processGuestData(guest: Guest, dto: GuestConfirmationDTO): Promis
 export async function updateGuest(guest: Guest): Promise<boolean> {
   const { id, ...guestData } = guest;
   try {
-    await firestore.collection('guests').doc(id).set(guest);
+    await firestore.collection('guests').doc(id).set(guestData, { merge: true });
     return true;
   } catch (error) {
     console.log('Error updating guest', error);
@@ -73,10 +73,10 @@ export async function updateGuest(guest: Guest): Promise<boolean> {
   }
 }
 
-export async function updateGuestsBatch(guestIds: Guest[]): Promise<boolean> {
+export async function updateGuestsBatch(guests: Guest[]): Promise<boolean> {
   try {
     const batch = firestore.batch();
-    guestIds.forEach(guest => {
+    guests.forEach(guest => {
       const { id, ...guestData } = guest;
       const docRef = firestore.collection('guests').doc(id);
       batch.set(docRef, guestData);

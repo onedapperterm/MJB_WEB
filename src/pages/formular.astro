@@ -66,7 +66,7 @@ if (Astro.request.method === "POST") {
   if(relatedConfirmedGuestsIds && relatedGuests) {
     const updatedGuests: Guest[] = relatedGuests
       .filter((relatedGuest) => relatedConfirmedGuestsIds?.includes(relatedGuest.id))
-      .map(guest => ({...guest, attendance: true, updatedAt: new Date().toISOString(), confirmed: true}));
+      .map(guest => ({...guest, attendance: true, updatedAt: new Date().toISOString(), confirmed: true, stayAtHotel: confirmationData.stayAtHotel}));
 
     try {
       await updateGuestsBatch(updatedGuests);
@@ -92,18 +92,22 @@ if (Astro.request.method === "POST") {
 
     {!justSubmitted && (
     <p class="title-formular">
-      {guest && guest.firstName + ', '} 
+      {guest  && guest.firstName + ', '} 
       nos encantaría oír pronto de ti, 
-      <br>por favor llena este formulario para
-      confirmar tu asistencia.
+      <br>
+      {!guest?.confirmed &&<span>por favor llena este formulario para confirmar tu asistencia.</span>}
+      {guest?.confirmed &&<span>Ya confirmaste tu asistencia, pero si quieres hacer algún cambio, puedes hacerlo aquí.</span>}
     </p>
     <ReservationComponent guest={guest} relatedGuests={relatedGuests}/>
     )}
 
     {justSubmitted && (
       <div class="confirmation-message">
-        <p>Gracias por confirmar tu asistencia!</p>
+        <p>Gracias por confirmar tu asistencia {guest  && guest.firstName + ' '}!</p>
         <p>Te esperamos el 21 de Diciembre a las 4:00 PM en la Hacienda Santa Cecilia.</p>
+        <button>
+          <a href="/">Volver al inicio</a>
+        </button>
       </div>
     )}
   </section>
@@ -127,6 +131,17 @@ if (Astro.request.method === "POST") {
   background-color: #E8DED2;
   padding: 3rem;
   border-radius: 8px;
+
+  button {
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
 }
 </style>
 
