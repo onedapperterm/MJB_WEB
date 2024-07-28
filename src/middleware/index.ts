@@ -12,7 +12,7 @@ async function auth({request}: APIContext, next: MiddlewareNext) {
 
   const isAuthenticated = checkAuthentication(request);
   const isPublicUrl = url.pathname == "/api/auth/signin" || url.pathname == "/";
-  const allowedUrls = ["/home", "/boda", "/historia", "/404", "/formular", ];
+  const allowedUrls = ["/home", "/boda", "/historia", "/404", "/formular",  ];
 
   if(!isAuthenticated && isPublicUrl) {
     const response = await next();
