@@ -34,21 +34,21 @@ import CountdownComponent from "../components/CountdownComponent.astro";
 
      <div class="details-container">
        <div class="details-unit">
-         <img class="icon" src="/public/assets/Copas.png" alt="Copas">
+         <img class="icon" src="/assets/Copas.png" alt="Copas">
          <h1>Detalles del evento</h1>
          <p>Fecha: 21 de Diciembre de 2024</p>
          <p>Hora: 15:00</p>
          <p>Dirección: Hacienda Santa Cecilia Sáchica</p>
        </div>
        <div class="details-unit">
-         <img class="icon" src="/public/assets/Vestido.png" alt="vestido">
+         <img class="icon" src="/assets/Vestido.png" alt="vestido">
          <h1>Código de vestimenta Formal</h1>
          <p>Mujeres: Vestido Largo <br />Colores oscuros</p>
          <p>Hombres: Traje Formal<br />Con Corbata</p>
          <a class="link-ideas" href="https://pin.it/63EgKiui3" target="_blank"><p>Aquí encuentras algunas ideas</p></a>
        </div>
        <div class="details-unit">
-         <img class="icon" src="/public/assets/Campana.png" alt="Campana">
+         <img class="icon" src="/assets/Campana.png" alt="Campana">
          <h1>¡Importante!</h1>
          <p>
            Queremos que estén conectados con nosotros durante la ceremonia, por
@@ -221,7 +221,10 @@ import CountdownComponent from "../components/CountdownComponent.astro";
     }
   }
 
-  @media only screen and (min-width: 890px) {
+  @media only screen and (max-width: 890px) {
+    .wedding-details {
+      padding: 10ch 5ch;
+    }
   }
 
   @media only screen and (max-width: 620px) {
@@ -231,7 +234,8 @@ import CountdownComponent from "../components/CountdownComponent.astro";
       }
     }
   }
-  @media only screen and (max-width: 420px) {
+
+  @media only screen and (max-width: 530px) {
     .wedding-details {
       padding: 10ch 5ch;
 
