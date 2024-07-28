@@ -22,7 +22,8 @@ export async function fetchGuest(firstName: string, lastName: string): Promise<G
 
   const queryRef = firestore.collection('guests')
     .where('firstName', '==' , normalizedFirstName)
-    .where('lastName', '==' , normalizedLastName);
+    .where('lastName', '==' , normalizedLastName)
+    .orderBy('reference', 'desc');
 
   const querySnapshot = await queryRef.get()
   const docId = querySnapshot?.docs[0]?.id;
@@ -54,6 +55,23 @@ export async function fetchGuestsByReference(reference: string): Promise<Guest[]
     return guests;
   } catch (error) {
     console.log('Error fetching guests by reference', error);
+    return undefined;
+  }
+}
+
+export async function fetchAllGuests(): Promise<Guest[] | undefined> {
+  try {
+    const querySnapshot = await firestore.collection('guests').get();
+    const guests: Guest[] = querySnapshot.docs.map(doc => {
+      return {
+        ...(doc.data() as Guest),
+        id: doc.id
+      }
+    });
+
+    return guests;
+  } catch (error) {
+    console.log('Error fetching all guests', error);
     return undefined;
   }
 }

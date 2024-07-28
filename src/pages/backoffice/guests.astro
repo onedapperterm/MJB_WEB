@@ -1,70 +1,47 @@
 ---
-import "../../styles/global.scss";
-import { firestore } from "../../firebase/server";
+import { fetchAllGuests } from "@/firebase/services/getters";
+import BackLayout from "../../layouts/BackLayout.astro";
 import type { Guest } from "@/model/guest.data";
 
-const collectionRef = firestore.collection("guests");
-const collectionSnapshot = await collectionRef.get();
-const guests: Guest[] = collectionSnapshot.docs.map((doc) => ({... doc.data(), ...{id: doc.id}} as Guest));
+
+const guests: Guest[] = await fetchAllGuests() || [];
 
 ---
-<div class="page-container">
-  <div class="guests-container">
-    {
-    guests.map((guest) => (
-    <div class="guest-card">
-      <div class="guest-card__name">
-        {guest.firstName} {guest.lastName} - {guest.id}
-      </div>
-      {
-      guest.confirmed ? 
-      <div>
-        <div class="guest-card__attendance">
-          {guest.attendance ? "Asistira" : "No asistira"}
-        </div>
-        <div class="guest-card__stay">
-          {guest.stayAtHotel ? "Se quedara en el hotel" : "No se quedara en el hotel"}
-        </div>
-        <div class="guest-card__confirmed">Confirmado</div> 
-      </div> : 
-      <div class="guest-card__confirmed">No confirmado aún</div>
-      }
-    </div>
-    ))
-    }
-  </div>
-</div>
+<BackLayout pageTitle="Guests Admin">
+
+  <h1>Guest Table</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Reference</th>
+        <th scope="col">Name</th>
+        <th scope="col">Confirmed</th>
+        <th scope="col">Attending</th>
+        <th scope="col">Cheked</th>
+        <th scope="col">Stay at hotel</th>
+        <th scope="col">id</th>
+      </tr>
+    </thead>
+    <tbody>
+      {guests.map((guest, i) => (
+        <tr>
+          <th scope="row">{i + 1}</th>
+          <td>{guest.reference}</td>
+          <td>{guest.firstName} {guest.lastName}</td>
+          <td>{guest.confirmed ? 'Confirmado' : 'No Confirmado'}</td>
+          <td>{guest.attendance ? 'Asistrá' : (guest.confirmed ? 'No Asistirá' : 'No Confirmado aún')}</td>
+          <td>{guest.checked ? 'Chequeado' : 'No Chequeado'}</td>
+          <td>{guest.stayAtHotel ? 'Si' : (guest.confirmed ? 'No' : 'No Confirmado aún')}</td>
+          <td>{guest.id}</td>
+        </tr>
+      ))}
+    </tbody>
+
+
+</BackLayout>
 
 <style lang="scss">
-.page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
-.guests-container {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(300px, 1fr));
-  gap: 1rem;
-}
-
-.guest-card {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.guest-card__name {
-  font-weight: bold;
-}
-
-.guest-card__attendance {
-  margin-top: 0.5rem;
-}
-
-.guest-card__stay {
-  margin-top: 0.5rem;
-}
 </style>

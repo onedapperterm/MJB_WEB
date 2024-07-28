@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
 ---
 
-<BaseLayout>
+<BaseLayout pageTitle="home" pageLayout="home">
   <div class="background-container">
     <picture>
       <source 
@@ -44,7 +44,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   justify-content: center;
   align-items: center;
   height: calc(100dvh - 80px);
-  // height: 100dvh; //Remove on full content version
+  height: 100dvh; /* Fallback for browsers that do not support Custom Properties */
   gap: 2ch;
 
   h4 {
