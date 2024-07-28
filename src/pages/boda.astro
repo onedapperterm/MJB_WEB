@@ -29,36 +29,34 @@ import CountdownComponent from "../components/CountdownComponent.astro";
 
   <section class="wedding-details">
     <p class="details-title">Detalles</p>
-    <p>
-      Pronto podrás encontrar aquí toda la información necesaria para el gran día.
-    </p>
+    
+    <p>Aquí te dejamos los detalles del gran día.</p>
 
-    <!-- <p>Aquí te dejamos los detalles del gran día.</p> -->
-
-    <!-- <div class="details-container"> -->
-    <!--   <div class="details-unit"> -->
-    <!--     <i class="fa-regular fa-calendar fa-2xl" style="color: #5C4433;;"></i> -->
-    <!--     <h1>Detalles del evento</h1> -->
-    <!--     <p>Fecha: 21 de Diciembre de 2024</p> -->
-    <!--     <p>Hora: 15:00</p> -->
-    <!--     <p>Dirección: Hacienda Santa Cecilia Sáchica</p> -->
-    <!--   </div> -->
-    <!--   <div class="details-unit"> -->
-    <!--     <i class="fa-regular fa-user fa-2xl" style="color: #5C4433;;"></i> -->
-    <!--     <h1>Dresscode Formal</h1> -->
-    <!--     <p>Mujeres: Vestido Largo <br />Colores oscuros</p> -->
-    <!--     <p>Hombres: Traje Negro <br />Corbata negra</p> -->
-    <!--   </div> -->
-    <!--   <div class="details-unit"> -->
-    <!--     <i class="fa-regular fa-bell fa-2xl" style="color: #5C4433;;"></i> -->
-    <!--     <h1>Importante!</h1> -->
-    <!--     <p> -->
-    <!--       Queremos que estén conectados con nosotros durante la ceremonia, por -->
-    <!--       favor no utilicen el celular ni publiquen en redes sociales. -->
-    <!--       Disfrutemos juntos de principio a fin. -->
-    <!--     </p> -->
-    <!--   </div> -->
-    <!-- </div> -->
+     <div class="details-container">
+       <div class="details-unit">
+         <img class="icon" src="/public/assets/Copas.png" alt="Copas">
+         <h1>Detalles del evento</h1>
+         <p>Fecha: 21 de Diciembre de 2024</p>
+         <p>Hora: 15:00</p>
+         <p>Dirección: Hacienda Santa Cecilia Sáchica</p>
+       </div>
+       <div class="details-unit">
+         <img class="icon" src="/public/assets/Vestido.png" alt="vestido">
+         <h1>Código de vestimenta Formal</h1>
+         <p>Mujeres: Vestido Largo <br />Colores oscuros</p>
+         <p>Hombres: Traje Formal<br />Con Corbata</p>
+         <a class="link-ideas" href="https://pin.it/63EgKiui3" target="_blank"><p>Aquí encuentras algunas ideas</p></a>
+       </div>
+       <div class="details-unit">
+         <img class="icon" src="/public/assets/Campana.png" alt="Campana">
+         <h1>¡Importante!</h1>
+         <p>
+           Queremos que estén conectados con nosotros durante la ceremonia, por
+           favor no utilicen el celular ni publiquen en redes sociales.
+           Disfrutemos juntos de principio a fin.
+         </p>
+       </div>
+     </div>
   </section>
 
   <div
@@ -69,7 +67,9 @@ import CountdownComponent from "../components/CountdownComponent.astro";
 
   <section class="hotels-section">
     <p class="hotels-section-title">Hoteles cerca</p>
-    <p>Las instalaciones cuentan con hotel, pero aquí hay otras opciones:</p>
+    <p>Las instalaciones cuentan con hotel, y habrán habitaciones reservadas especialmente para nuestros invitados.
+      <br>Por favor haznos saber con tiempo si requieres una reserva.</p>
+      <p>Aquí también hay otras opciones:</p>
 
     <div class="hotels-section-container">
       <div class="hotels-section-unit">
@@ -116,7 +116,6 @@ import CountdownComponent from "../components/CountdownComponent.astro";
 
     h1 {
       transform: translate(0, -40px);
-      font-size: 11rem;
     }
   }
 
